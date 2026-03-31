@@ -1,10 +1,5 @@
 import { cn } from "@/lib/utils";
-import type { SlideFormat } from "@/features/slides/types";
-
-const DIMENSIONS = {
-  vertical: { width: 1080, height: 1350 },
-  square: { width: 1080, height: 1080 },
-};
+import { SlideFormat, SLIDE_DIMENSIONS } from "@/shared/enums/slide-format";
 
 interface SlideCanvasProps {
   format?: SlideFormat;
@@ -14,12 +9,12 @@ interface SlideCanvasProps {
 }
 
 export function SlideCanvas({
-  format = "square",
+  format = SlideFormat.Square,
   children,
   className,
   id,
 }: SlideCanvasProps) {
-  const { width, height } = DIMENSIONS[format];
+  const { width, height } = SLIDE_DIMENSIONS[format];
 
   return (
     <div

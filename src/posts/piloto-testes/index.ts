@@ -1,8 +1,9 @@
 import type { Carousel } from "@/features/slides/types";
+import { SlideFormat } from "@/shared/enums/slide-format";
 
 export const pilotoTestes: Carousel = {
   title: "Programação com Agentes de IA",
-  format: "square",
+  format: SlideFormat.Square,
   slides: [
     // 1 — Capa
     {

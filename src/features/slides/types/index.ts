@@ -1,4 +1,5 @@
-export type SlideFormat = "vertical" | "square";
+import { SlideFormat } from "@/shared/enums/slide-format";
+export { SlideFormat };
 
 export type SlideType = "cover" | "content" | "code" | "comparison" | "closing";
 
