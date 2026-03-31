@@ -1,12 +1,12 @@
-# AVM Slides — Design System & Carousel Builder
+# AVM Slides — Design System & Slide Builder
 
-**Data:** 25/03/2026
+**Data:** 31/03/2026
 **Autor:** Allan Victor de Moura
 **Status:** Building
 
 ---
 
-## 💡 Problema
+## Problema
 
 **Em uma frase:**
 > Criar conteúdo visual consistente e profissional para LinkedIn consome muito tempo e resulta em posts genéricos sem identidade própria.
@@ -16,17 +16,17 @@ Devs que produzem conteúdo no LinkedIn geralmente usam Canva ou ferramentas gen
 
 ---
 
-## ✅ Solução
+## Solução
 
 **Em uma frase:**
-> Um design system pessoal implementado como projeto React local que gera carousels e capas para LinkedIn com identidade visual única, otimizados para exportação como imagem.
+> Um design system pessoal implementado como projeto React local que gera capas e slides para LinkedIn com identidade visual única, otimizados para exportação como imagem.
 
 **Como funciona:**
 Projeto Vite + React que renderiza slides HTML usando tokens de design pré-definidos (cores, tipografia, espaçamento). O dev seleciona um template, insere o conteúdo, visualiza em tempo real e exporta como PNG em alta resolução. No futuro, integra com IA para gerar o conteúdo automaticamente.
 
 ---
 
-## 👤 Público-Alvo
+## Público-Alvo
 
 **Persona principal:**
 > Allan Victor — dev frontend que quer se posicionar no LinkedIn com conteúdo técnico e acessível, atingindo tanto devs juniores quanto seniores.
@@ -36,7 +36,7 @@ Projeto Vite + React que renderiza slides HTML usando tokens de design pré-defi
 
 ---
 
-## 🎯 Proposta de Valor
+## Proposta de Valor
 
 **Por que isso e não Canva/PowerPoint?**
 > Identidade visual 100% própria, otimizada para conteúdo técnico (syntax highlighting, blocos de código), com workflow integrado ao ecossistema dev.
@@ -45,46 +45,66 @@ Projeto Vite + React que renderiza slides HTML usando tokens de design pré-defi
 - Canva: genérico, sem suporte a código, perde identidade
 - PowerPoint/Google Slides: trabalhoso exportar, sem consistência
 
-**Seu diferencial:**
+**Diferenciais:**
 - Design system como código (versionável, replicável, consistente)
 - Templates pré-prontos para conteúdo técnico
 - Exportação otimizada para LinkedIn (dimensões, resolução)
 
 ---
 
-## 📊 Métricas de Sucesso
+## Identidade Visual
+
+**Direção:** Cyberpunk Tech Editorial — grit controlado, tipografia sci-fi, paleta quente com tensão fria.
+
+**Tipografia:**
+- Headlines: **Orbitron** 700/900
+- Body: **Inter** 400
+- Metadados, overlines, código: **JetBrains Mono** 400/500
+
+**Paleta principal:**
+- `--primary-500: #FF5500` — laranja-fogo (headlines, CTAs, keywords)
+- `--primary-600: #FF2D00` — vermelho-fogo (bordas ativas, pressed)
+- `--primary-800: #6B0D00` — ferrugem (fundos de destaque)
+- `--secondary-500: #00E5C8` — cyan elétrico (funções, tipos, tags)
+- `--secondary-900: #0A2020` — teal profundo (fundos secundários)
+- `--neutral-950: #080808` — fundo dos slides
+
+**Hierarquia de cor:** primary em ~70% dos destaques, secondary em ~20%.
+
+---
+
+## Métricas de Sucesso
 
 **North Star Metric:**
-> Tempo médio para criar um carousel completo (meta: < 30 min)
+> Tempo médio para criar um slide completo (meta: < 15 min)
 
-**Metas iniciais (3 meses):**
-- [ ] Design system definido e implementado
-- [ ] 5 templates funcionais (capa, conteúdo, código, comparação, CTA final)
+**Metas iniciais:**
+- [ ] Design system v2 implementado (nova paleta + Orbitron)
+- [ ] Template de capa funcional com foto do autor
 - [ ] 12+ posts publicados usando o sistema (2/semana × 6 semanas)
 
 ---
 
-## 🚀 MVP Scope
+## MVP Scope
 
 **O que entra:**
-- Design system (tokens de cor, tipografia, espaçamento, componentes)
-- 5 templates de slide (capa, conteúdo texto, código, comparação, slide final)
-- Template de thumbnail/capa de post
-- Suporte vertical (1080×1350) e quadrado (1080×1080)
+- Design system v2 (tokens de cor scales numéricas, Orbitron, espaçamento)
+- Template de capa (cover slide) com layout split 50/50 e foto do autor
+- Suporte formato quadrado (1080×1080)
 - Dark mode (tema primário)
 - Exportação HTML → PNG via html-to-image
-- Preview em tempo real
 
 **O que NÃO entra:**
-- Light mode (v1.1)
-- Integração com IA (v2)
+- Outros templates de slide (conteúdo, código, comparação, fechamento) — v1.1
+- Light mode — v1.1
+- Integração com IA — v2
 - CMS/painel de gerenciamento
 - Deploy público
 - Animações
 
 ---
 
-## 🛠 Stack
+## Stack
 
 | Camada | Tecnologia |
 |--------|------------|
@@ -92,16 +112,14 @@ Projeto Vite + React que renderiza slides HTML usando tokens de design pré-defi
 | UI | React + TypeScript |
 | Styling | Tailwind CSS |
 | Componentes | shadcn/ui (base) |
-| Syntax Highlight | Shiki ou Prism |
+| Syntax Highlight | Shiki |
 | Exportação | html-to-image |
-| Fonts | Google Fonts (a definir) |
+| Fonts | Google Fonts (Orbitron, Inter, JetBrains Mono) |
 
 ---
 
-## 📝 Notas
+## Notas
 
-- Estética: base orgânica (gradientes, formas suaves) com detalhes glitch/cyber pontuais
-- Paleta: Laranja vibrante (#FF6B00) como acento dominante + Cyan elétrico (#00F0E0) como cor de suporte, sobre fundo neutro escuro (#141414)
-- Hierarquia de cor: laranja em ~70% dos destaques (headlines, keywords, CTAs), cyan em ~20% (funções, tags secundárias)
-- Marca: assinatura tipográfica simples no footer ou slide final
+- Foto do autor ainda será editada — template usa placeholder até foto final estar pronta
+- Elementos visuais cyberpunk avançados (grain, grid, brackets nos slides) serão ajustados na refatoração de templates
 - Futuro: integração com Claude/IA para gerar conteúdo + slides automaticamente via prompt
