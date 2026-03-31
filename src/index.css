@@ -61,7 +61,7 @@
     --card-foreground: #141414;
     --popover: #ffffff;
     --popover-foreground: #141414;
-    --primary: #FF6B00;
+    --primary: #FF5500;
     --primary-foreground: #ffffff;
     --secondary: #f0f0f0;
     --secondary-foreground: #141414;
@@ -72,21 +72,21 @@
     --destructive: #8B2E2E;
     --border: rgba(20, 20, 20, 0.12);
     --input: rgba(20, 20, 20, 0.12);
-    --ring: #FF6B00;
-    --chart-1: #FF6B00;
-    --chart-2: #00F0E0;
+    --ring: #FF5500;
+    --chart-1: #FF5500;
+    --chart-2: #00E5C8;
     --chart-3: #8BBF65;
     --chart-4: #D4A054;
     --chart-5: #C396D8;
     --radius: 0.75rem;
     --sidebar: #f5f5f5;
     --sidebar-foreground: #141414;
-    --sidebar-primary: #FF6B00;
+    --sidebar-primary: #FF5500;
     --sidebar-primary-foreground: #ffffff;
     --sidebar-accent: #f0f0f0;
     --sidebar-accent-foreground: #141414;
     --sidebar-border: rgba(20, 20, 20, 0.08);
-    --sidebar-ring: #FF6B00;
+    --sidebar-ring: #FF5500;
 
     /* ---- Brand tokens (slide canvas — always dark) ---- */
 
@@ -119,48 +119,50 @@
     --neutral-400: #9A9790;
     --neutral-100: #F0EDE8;
 
+    /* ---- Semantic aliases (apontam para as scales acima) ---- */
+
     /* Backgrounds */
-    --bg-primary: #141414;
-    --bg-secondary: #1C1C1C;
-    --bg-tertiary: #242424;
-    --bg-code: #111111;
+    --bg-primary:   var(--neutral-950);
+    --bg-secondary: var(--neutral-800);
+    --bg-tertiary:  var(--neutral-700);
+    --bg-code:      var(--neutral-900);
 
     /* Text */
-    --text-primary: #F0EDE8;
-    --text-secondary: #9A9790;
-    --text-muted: #5C5A56;
+    --text-primary:   var(--neutral-100);
+    --text-secondary: var(--neutral-400);
+    --text-muted:     var(--neutral-500);
 
-    /* Accent — Laranja (dominante, 70% dos destaques) */
-    --accent-primary: #FF6B00;
-    --accent-light: #FF8F3F;
-    --accent-dark: #CC5500;
-    --accent-glow: rgba(255, 107, 0, 0.15);
+    /* Accent — Primary (laranja-fogo, dominante) */
+    --accent-primary: var(--primary-500);
+    --accent-light:   var(--primary-400);
+    --accent-dark:    var(--primary-600);
+    --accent-glow:    rgba(255, 85, 0, 0.15);
 
-    /* Secondary — Cyan Elétrico (suporte, 20% dos destaques) */
-    --cyan: #00F0E0;
-    --cyan-muted: #5CE8DC;
-    --cyan-glow: rgba(0, 240, 224, 0.08);
+    /* Secondary — Cyan elétrico (suporte) */
+    --cyan:           var(--secondary-500);
+    --cyan-muted:     var(--secondary-400);
+    --cyan-glow:      rgba(0, 229, 200, 0.08);
+
+    /* Borders (atualizados para nova paleta) */
+    --border-subtle:    rgba(240, 237, 232, 0.08);
+    --border-accent:    rgba(255, 85, 0, 0.3);
+    --border-secondary: rgba(0, 229, 200, 0.12);
+
+    /* Gradients */
+    --gradient-accent: linear-gradient(135deg, #FF5500 0%, #FF7033 100%);
+    --gradient-bg:     radial-gradient(ellipse at 70% 20%, rgba(255, 85, 0, 0.06) 0%, transparent 60%);
+    --gradient-cyber:  linear-gradient(180deg, rgba(255, 85, 0, 0.03) 0%, transparent 40%);
+
+    /* Shadows */
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(240, 237, 232, 0.05);
+    --shadow-glow: 0 0 20px rgba(255, 85, 0, 0.1), 0 0 40px rgba(255, 85, 0, 0.05);
+    --shadow-code: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 
     /* Semantic */
     --color-success: #2D8B6B;
     --color-error: #8B2E2E;
     --color-warning: #8B6B2E;
     --color-info: #2E4F8B;
-
-    /* Borders */
-    --border-subtle: rgba(240, 237, 232, 0.08);
-    --border-accent: rgba(255, 107, 0, 0.3);
-    --border-secondary: rgba(0, 240, 224, 0.12);
-
-    /* Gradients */
-    --gradient-accent: linear-gradient(135deg, #FF6B00 0%, #FF8F3F 100%);
-    --gradient-bg: radial-gradient(ellipse at 70% 20%, rgba(255, 107, 0, 0.06) 0%, transparent 60%);
-    --gradient-cyber: linear-gradient(180deg, rgba(255, 107, 0, 0.03) 0%, transparent 40%);
-
-    /* Shadows */
-    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(240, 237, 232, 0.05);
-    --shadow-glow: 0 0 20px rgba(255, 107, 0, 0.1), 0 0 40px rgba(255, 107, 0, 0.05);
-    --shadow-code: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 
     /* Spacing (4px grid) */
     --space-1: 4px;
@@ -191,14 +193,14 @@
     --text-code: 0.9375rem;      /* 15px — blocos de código */
 
     /* Syntax Highlighting */
-    --code-keyword: #FF6B00;   /* const, await, interface, => */
-    --code-function: #00F0E0;  /* fetch, then, json, map */
-    --code-string: #8BBF65;
-    --code-number: #D4A054;
-    --code-comment: #5C5A56;
-    --code-variable: #F0EDE8;
-    --code-type: #C396D8;      /* User, Promise */
-    --code-operator: #9A9790;  /* =, +, : */
+    --code-keyword:  var(--primary-500);   /* const, await, interface, => */
+    --code-function: var(--secondary-500); /* fetch, then, json, map */
+    --code-string:   #8BBF65;
+    --code-number:   #D4A054;
+    --code-comment:  var(--neutral-500);
+    --code-variable: var(--neutral-100);
+    --code-type:     #C396D8;              /* User, Promise */
+    --code-operator: var(--neutral-400);   /* =, +, : */
 }
 
 .dark {
@@ -209,7 +211,7 @@
     --card-foreground: #F0EDE8;
     --popover: #1C1C1C;
     --popover-foreground: #F0EDE8;
-    --primary: #FF6B00;
+    --primary: #FF5500;
     --primary-foreground: #F0EDE8;
     --secondary: #242424;
     --secondary-foreground: #F0EDE8;
@@ -220,20 +222,20 @@
     --destructive: #8B2E2E;
     --border: rgba(240, 237, 232, 0.08);
     --input: rgba(240, 237, 232, 0.08);
-    --ring: #FF6B00;
-    --chart-1: #FF6B00;
-    --chart-2: #00F0E0;
+    --ring: #FF5500;
+    --chart-1: #FF5500;
+    --chart-2: #00E5C8;
     --chart-3: #8BBF65;
     --chart-4: #D4A054;
     --chart-5: #C396D8;
     --sidebar: #1C1C1C;
     --sidebar-foreground: #F0EDE8;
-    --sidebar-primary: #FF6B00;
+    --sidebar-primary: #FF5500;
     --sidebar-primary-foreground: #F0EDE8;
     --sidebar-accent: #242424;
     --sidebar-accent-foreground: #F0EDE8;
     --sidebar-border: rgba(240, 237, 232, 0.08);
-    --sidebar-ring: #FF6B00;
+    --sidebar-ring: #FF5500;
 }
 
 @layer base {
@@ -266,7 +268,7 @@
 
 /* Highlighted lines (via transformer data attribute) */
 .shiki .line[data-highlighted="true"] {
-    background: rgba(255, 107, 0, 0.08);
+    background: rgba(255, 85, 0, 0.08);
     border-left: 2px solid var(--accent-primary);
     margin-left: -16px;
     padding-left: 14px;
