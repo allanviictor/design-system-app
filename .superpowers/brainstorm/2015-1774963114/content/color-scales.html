@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Scales</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #080808;
+    color: #F0EDE8;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 28px 24px 48px;
+  }
+  h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.01em; font-family: system-ui; }
+  .subtitle { color: #5C5A56; font-size: 11px; margin-bottom: 32px; line-height: 1.5; }
+
+  .scale-group { margin-bottom: 32px; }
+  .scale-label {
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: #5C5A56; margin-bottom: 10px;
+  }
+  .scale-row { display: flex; gap: 0; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); }
+  .swatch {
+    flex: 1; height: 72px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end;
+    padding-bottom: 7px; gap: 2px;
+    position: relative; cursor: default;
+    transition: flex 0.2s;
+  }
+  .swatch:hover { flex: 1.4; }
+  .swatch-step {
+    font-size: 8px; color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+  }
+  .swatch-hex {
+    font-size: 8px; color: rgba(255,255,255,0.7);
+    letter-spacing: 0.05em;
+  }
+  .swatch.base { outline: 2px solid rgba(255,255,255,0.3); outline-offset: -2px; }
+  .swatch.base .swatch-step { color: rgba(255,255,255,0.9); font-weight: 600; }
+  .swatch.base .swatch-hex { color: #fff; }
+
+  /* token table */
+  .token-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .token-table tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .token-table tr:last-child { border-bottom: none; }
+  .token-table td { padding: 7px 4px; font-size: 10px; vertical-align: middle; }
+  .dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 8px; border: 1px solid rgba(255,255,255,0.08); }
+  .tname { color: #9A9790; }
+  .thex { color: #F0EDE8; letter-spacing: 0.05em; }
+  .trole { color: #5C5A56; font-size: 9px; }
+
+  .divider { height: 1px; background: rgba(255,255,255,0.05); margin: 8px 0 24px; }
+
+  .note {
+    background: rgba(255,85,0,0.06);
+    border: 1px solid rgba(255,85,0,0.15);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 10px;
+    color: #9A9790;
+    margin-top: 32px;
+    line-height: 1.6;
+  }
+  .note strong { color: #FF5500; }
+</style>
+</head>
+<body>
+
+<h2>Derivação das scales</h2>
+<p class="subtitle">Baseado nos 5 tokens que você definiu. Hover em cada swatch para expandir.</p>
+
+<!-- ═══════════ PRIMARY ═══════════ -->
+<div class="scale-group">
+  <div class="scale-label">Primary — laranja-fogo</div>
+  <div class="scale-row">
+    <div class="swatch" style="background:#FF9055;">
+      <span class="swatch-step">300</span>
+      <span class="swatch-hex">#FF9055</span>
+    </div>
+    <div class="swatch" style="background:#FF7033;">
+      <span class="swatch-step">400</span>
+      <span class="swatch-hex">#FF7033</span>
+    </div>
+    <div class="swatch base" style="background:#FF5500;">
+      <span class="swatch-step">500 ★</span>
+      <span class="swatch-hex">#FF5500</span>
+    </div>
+    <div class="swatch base" style="background:#FF2D00;">
+      <span class="swatch-step">600 ★</span>
+      <span class="swatch-hex">#FF2D00</span>
+    </div>
+    <div class="swatch" style="background:#CC2400;">
+      <span class="swatch-step">700</span>
+      <span class="swatch-hex">#CC2400</span>
+    </div>
+    <div class="swatch base" style="background:#6B0D00;">
+      <span class="swatch-step">800 ★</span>
+      <span class="swatch-hex">#6B0D00</span>
+    </div>
+    <div class="swatch" style="background:#3A0600;">
+      <span class="swatch-step">900</span>
+      <span class="swatch-hex">#3A0600</span>
+    </div>
+  </div>
+  <table class="token-table">
+    <tr><td><span class="dot" style="background:#FF9055;"></span><span class="tname">--primary-300</span></td><td class="thex">#FF9055</td><td class="trole">laranja claro — highlights, decorativo</td></tr>
+    <tr><td><span class="dot" style="background:#FF7033;"></span><span class="tname">--primary-400</span></td><td class="thex">#FF7033</td><td class="trole">hover states, versão suave</td></tr>
+    <tr><td><span class="dot" style="background:#FF5500;"></span><span class="tname">--primary-500</span></td><td class="thex">#FF5500</td><td class="trole">★ base — headlines, CTAs, keywords</td></tr>
+    <tr><td><span class="dot" style="background:#FF2D00;"></span><span class="tname">--primary-600</span></td><td class="thex">#FF2D00</td><td class="trole">★ vermelho-fogo — bordas ativas, pressed</td></tr>
+    <tr><td><span class="dot" style="background:#CC2400;"></span><span class="tname">--primary-700</span></td><td class="thex">#CC2400</td><td class="trole">sombras, estados desabilitados</td></tr>
+    <tr><td><span class="dot" style="background:#6B0D00;"></span><span class="tname">--primary-800</span></td><td class="thex">#6B0D00</td><td class="trole">★ ferrugem — fundos de destaque, glows</td></tr>
+    <tr><td><span class="dot" style="background:#3A0600;"></span><span class="tname">--primary-900</span></td><td class="thex">#3A0600</td><td class="trole">fundos sutis, bg de cards com acento</td></tr>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════ SECONDARY ═══════════ -->
+<div class="scale-group">
+  <div class="scale-label">Secondary — cyan elétrico</div>
+  <div class="scale-row">
+    <div class="swatch" style="background:#A8F7EE;">
+      <span class="swatch-step" style="color:rgba(0,0,0,0.5);">300</span>
+      <span class="swatch-hex" style="color:rgba(0,0,0,0.6);">#A8F7EE</span>
+    </div>
+    <div class="swatch" style="background:#4DEDD9;">
+      <span class="swatch-step" style="color:rgba(0,0,0,0.5);">400</span>
+      <span class="swatch-hex" style="color:rgba(0,0,0,0.6);">#4DEDD9</span>
+    </div>
+    <div class="swatch base" style="background:#00E5C8;">
+      <span class="swatch-step" style="color:rgba(0,0,0,0.7);">500 ★</span>
+      <span class="swatch-hex" style="color:rgba(0,0,0,0.8);">#00E5C8</span>
+    </div>
+    <div class="swatch" style="background:#00B8A0;">
+      <span class="swatch-step">600</span>
+      <span class="swatch-hex">#00B8A0</span>
+    </div>
+    <div class="swatch" style="background:#008A78;">
+      <span class="swatch-step">700</span>
+      <span class="swatch-hex">#008A78</span>
+    </div>
+    <div class="swatch" style="background:#005C50;">
+      <span class="swatch-step">800</span>
+      <span class="swatch-hex">#005C50</span>
+    </div>
+    <div class="swatch base" style="background:#0A2020;">
+      <span class="swatch-step">900 ★</span>
+      <span class="swatch-hex">#0A2020</span>
+    </div>
+  </div>
+  <table class="token-table">
+    <tr><td><span class="dot" style="background:#A8F7EE;border-color:rgba(0,0,0,0.1);"></span><span class="tname">--secondary-300</span></td><td class="thex">#A8F7EE</td><td class="trole">highlights muito sutis, decorativo</td></tr>
+    <tr><td><span class="dot" style="background:#4DEDD9;"></span><span class="tname">--secondary-400</span></td><td class="thex">#4DEDD9</td><td class="trole">texto secundário, versão suave</td></tr>
+    <tr><td><span class="dot" style="background:#00E5C8;"></span><span class="tname">--secondary-500</span></td><td class="thex">#00E5C8</td><td class="trole">★ base — funções, tipos, tags, brackets</td></tr>
+    <tr><td><span class="dot" style="background:#00B8A0;"></span><span class="tname">--secondary-600</span></td><td class="thex">#00B8A0</td><td class="trole">hover states, versão escura</td></tr>
+    <tr><td><span class="dot" style="background:#008A78;"></span><span class="tname">--secondary-700</span></td><td class="thex">#008A78</td><td class="trole">bordas sutis com acento cyan</td></tr>
+    <tr><td><span class="dot" style="background:#005C50;"></span><span class="tname">--secondary-800</span></td><td class="thex">#005C50</td><td class="trole">sombras, estados desabilitados</td></tr>
+    <tr><td><span class="dot" style="background:#0A2020;"></span><span class="tname">--secondary-900</span></td><td class="thex">#0A2020</td><td class="trole">★ teal profundo — fundos secundários, bg cards</td></tr>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════ NEUTROS ═══════════ -->
+<div class="scale-group">
+  <div class="scale-label">Neutros — backgrounds & texto</div>
+  <div class="scale-row">
+    <div class="swatch base" style="background:#080808;">
+      <span class="swatch-step">950 ★</span>
+      <span class="swatch-hex">#080808</span>
+    </div>
+    <div class="swatch" style="background:#111111;">
+      <span class="swatch-step">900</span>
+      <span class="swatch-hex">#111111</span>
+    </div>
+    <div class="swatch" style="background:#1A1A1A;">
+      <span class="swatch-step">800</span>
+      <span class="swatch-hex">#1A1A1A</span>
+    </div>
+    <div class="swatch" style="background:#242424;">
+      <span class="swatch-step">700</span>
+      <span class="swatch-hex">#242424</span>
+    </div>
+    <div class="swatch" style="background:#5C5A56;">
+      <span class="swatch-step">500</span>
+      <span class="swatch-hex">#5C5A56</span>
+    </div>
+    <div class="swatch" style="background:#9A9790;">
+      <span class="swatch-step">400</span>
+      <span class="swatch-hex">#9A9790</span>
+    </div>
+    <div class="swatch" style="background:#F0EDE8;">
+      <span class="swatch-step" style="color:rgba(0,0,0,0.5);">100</span>
+      <span class="swatch-hex" style="color:rgba(0,0,0,0.6);">#F0EDE8</span>
+    </div>
+  </div>
+  <table class="token-table">
+    <tr><td><span class="dot" style="background:#080808;border-color:rgba(255,255,255,0.15);"></span><span class="tname">--neutral-950</span></td><td class="thex">#080808</td><td class="trole">★ bg-primary — fundo dos slides</td></tr>
+    <tr><td><span class="dot" style="background:#111111;border-color:rgba(255,255,255,0.1);"></span><span class="tname">--neutral-900</span></td><td class="thex">#111111</td><td class="trole">bg-code — blocos de código</td></tr>
+    <tr><td><span class="dot" style="background:#1A1A1A;border-color:rgba(255,255,255,0.08);"></span><span class="tname">--neutral-800</span></td><td class="thex">#1A1A1A</td><td class="trole">bg-secondary — cards, blocos</td></tr>
+    <tr><td><span class="dot" style="background:#242424;border-color:rgba(255,255,255,0.06);"></span><span class="tname">--neutral-700</span></td><td class="thex">#242424</td><td class="trole">bg-tertiary — hover, elementos elevados</td></tr>
+    <tr><td><span class="dot" style="background:#5C5A56;"></span><span class="tname">--neutral-500</span></td><td class="thex">#5C5A56</td><td class="trole">text-muted — paginação, metadados</td></tr>
+    <tr><td><span class="dot" style="background:#9A9790;"></span><span class="tname">--neutral-400</span></td><td class="thex">#9A9790</td><td class="trole">text-secondary — subtítulos</td></tr>
+    <tr><td><span class="dot" style="background:#F0EDE8;border-color:rgba(0,0,0,0.1);"></span><span class="tname">--neutral-100</span></td><td class="thex">#F0EDE8</td><td class="trole">text-primary — headlines, body</td></tr>
+  </table>
+</div>
+
+<div class="note">
+  <strong>★ = tokens que você definiu diretamente.</strong> Os demais foram derivados matematicamente interpolando luminosidade e saturação entre os pontos fixos. Confirme se algum passo parece errado — posso ajustar.
+</div>
+
+</body>
+</html>

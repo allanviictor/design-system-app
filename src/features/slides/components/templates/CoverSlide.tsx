@@ -1,20 +1,23 @@
-import { SlideCanvas } from "../canvas/SlideCanvas";
-import { AccentBar } from "@/shared/components/AccentBar";
-import { BgShape } from "@/shared/components/BgShape";
-import { Overline } from "@/shared/components/Overline";
-import { Pagination } from "@/shared/components/Pagination";
-import { Tag } from "@/shared/components/Tag";
-import type { CoverSlide as CoverSlideData, SlideFormat } from "@/features/slides/types";
-import { highlightWords } from "@/shared/lib/highlight";
+import {
+  SlideFormat,
+  type CoverSlide as CoverSlideData,
+} from "@/features/slides/types"
+import { AccentBar } from "@/shared/components/AccentBar"
+import { BgShape } from "@/shared/components/BgShape"
+import { Overline } from "@/shared/components/Overline"
+import { Pagination } from "@/shared/components/Pagination"
+import { Tag } from "@/shared/components/Tag"
+import { highlightWords } from "@/shared/lib/highlight"
+import { SlideCanvas } from "../canvas/SlideCanvas"
 
 interface CoverSlideProps extends CoverSlideData {
-  format?: SlideFormat;
-  currentSlide: number;
-  totalSlides: number;
+  format?: SlideFormat
+  currentSlide: number
+  totalSlides: number
 }
 
 export function CoverSlide({
-  format = "square",
+  format = SlideFormat.Square,
   overline,
   headline,
   highlightWords: words,
@@ -23,7 +26,8 @@ export function CoverSlide({
   currentSlide,
   totalSlides,
 }: CoverSlideProps) {
-  const headlineSize = format === "vertical" ? "var(--text-display)" : "var(--text-h1)";
+  const headlineSize =
+    format === "vertical" ? "var(--text-display)" : "var(--text-h1)"
 
   return (
     <SlideCanvas format={format}>
@@ -43,10 +47,24 @@ export function CoverSlide({
         }}
       >
         {/* Top content */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)", flex: 1, justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--space-6)",
+            flex: 1,
+            justifyContent: "center",
+          }}
+        >
           {overline && <Overline>{overline}</Overline>}
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-6)",
+            }}
+          >
             <h1
               style={{
                 fontFamily: "var(--font-heading)",
@@ -78,9 +96,21 @@ export function CoverSlide({
         </div>
 
         {/* Bottom: tags + pagination */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--space-4)",
+          }}
+        >
           {tags && tags.length > 0 && (
-            <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "var(--space-3)",
+                flexWrap: "wrap",
+              }}
+            >
               {tags.map((tag, i) => (
                 <Tag key={tag} variant={i === 0 ? "primary" : "secondary"}>
                   {tag}
@@ -93,5 +123,5 @@ export function CoverSlide({
 
       <Pagination current={currentSlide} total={totalSlides} />
     </SlideCanvas>
-  );
+  )
 }

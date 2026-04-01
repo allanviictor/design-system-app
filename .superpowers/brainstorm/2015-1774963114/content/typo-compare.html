@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparação Tipográfica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@700;800&family=Orbitron:wght@700;800;900&family=Rajdhani:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #111;
+    color: #F0EDE8;
+    font-family: system-ui, sans-serif;
+    padding: 32px 24px;
+    min-height: 100vh;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #F0EDE8;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    color: #9A9790;
+    font-size: 13px;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    border: 1px solid rgba(240,237,232,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    background: #161616;
+  }
+
+  .card:hover { border-color: rgba(255,107,0,0.3); transform: translateY(-2px); }
+  .card.selected { border-color: #FF6B00; box-shadow: 0 0 0 1px rgba(255,107,0,0.4), 0 0 20px rgba(255,107,0,0.1); }
+
+  .card-preview {
+    background: #0E0E0E;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+  }
+
+  .card-label {
+    padding: 14px 16px;
+    border-top: 1px solid rgba(240,237,232,0.06);
+  }
+
+  .card-label h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #F0EDE8;
+    margin-bottom: 3px;
+  }
+
+  .card-label p {
+    font-size: 11px;
+    color: #9A9790;
+    line-height: 1.4;
+  }
+
+  /* grain */
+  .grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+  }
+
+  /* grid bg */
+  .gridbg {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,107,0,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,107,0,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+
+  /* glow */
+  .glow-tr {
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(255,107,0,0.09) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  /* bracket corners */
+  .br-tr {
+    position: absolute;
+    top: 12px; right: 12px;
+    width: 18px; height: 18px;
+    border-top: 1px solid rgba(0,240,224,0.35);
+    border-right: 1px solid rgba(0,240,224,0.35);
+    pointer-events: none;
+  }
+  .br-bl {
+    position: absolute;
+    bottom: 12px; left: 12px;
+    width: 14px; height: 14px;
+    border-bottom: 1px solid rgba(255,107,0,0.35);
+    border-left: 1px solid rgba(255,107,0,0.35);
+    pointer-events: none;
+  }
+
+  .slide-inner {
+    position: relative;
+    padding: 20px 20px 16px;
+  }
+
+  .overline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .overline-bar { width: 2px; height: 11px; background: #FF6B00; }
+  .overline-text {
+    color: #FF8F3F;
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+  }
+
+  .accent-bar {
+    width: 32px; height: 2px;
+    background: linear-gradient(90deg, #FF6B00, #FF8F3F);
+    margin: 8px 0 12px;
+    border-radius: 1px;
+  }
+
+  .body-text {
+    color: #C8C5C0;
+    font-size: 11px;
+    line-height: 1.6;
+    font-family: system-ui;
+    margin-bottom: 12px;
+  }
+
+  .code-snippet {
+    background: #111;
+    border: 1px solid rgba(240,237,232,0.07);
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #9A9790;
+    margin-bottom: 10px;
+  }
+
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-sig {
+    color: #5C5A56;
+    font-size: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* selected indicator */
+  .selected-badge {
+    display: none;
+    position: absolute;
+    top: 10px; right: 10px;
+    background: #FF6B00;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    z-index: 10;
+    font-family: system-ui;
+  }
+  .card.selected .selected-badge { display: block; }
+</style>
+</head>
+<body>
+
+<h2>Qual fonte para os headlines?</h2>
+<p class="subtitle">Mesma estrutura do slide B (equilibrado) — só a fonte do título muda. Metadados sempre em JetBrains Mono.</p>
+
+<div class="grid">
+
+  <!-- A: Bebas Neue -->
+  <div class="card" onclick="toggleCard(this, 'a')">
+    <div class="card-preview">
+      <svg class="grain" xmlns="http://www.w3.org/2000/svg"><filter id="gA"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gA)"/></svg>
+      <div class="gridbg"></div>
+      <div class="glow-tr"></div>
+      <div class="br-tr"></div>
+      <div class="br-bl"></div>
+      <div class="selected-badge">✓ Selecionado</div>
+      <div class="slide-inner">
+        <div class="overline">
+          <div class="overline-bar"></div>
+          <span class="overline-text">CONCEITO</span>
+        </div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1.0;letter-spacing:0.04em;color:#F0EDE8;">
+          O QUE É UM <span style="color:#FF6B00;">AGENTE?</span>
+        </div>
+        <div class="accent-bar"></div>
+        <div class="body-text">Um agente é um LLM que pode usar <span style="color:#00F0E0;font-family:'JetBrains Mono',monospace;font-size:10px;">ferramentas</span> para completar tarefas. Planeja, executa e avalia resultados.</div>
+        <div class="code-snippet"><span style="color:#FF6B00;">const</span> agent = <span style="color:#00F0E0;">createAgent</span>({ tools, model })</div>
+        <div class="footer-row">
+          <span class="footer-sig">allan victor · @allanvictorm</span>
+          <span class="footer-sig">02 / 07</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>A — Bebas Neue</h3>
+      <p>All-caps forçado, industrial, máximo impacto. Tracking positivo dá respiração.</p>
+    </div>
+  </div>
+
+  <!-- B: Barlow Condensed -->
+  <div class="card" onclick="toggleCard(this, 'b')">
+    <div class="card-preview">
+      <svg class="grain" xmlns="http://www.w3.org/2000/svg"><filter id="gB"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gB)"/></svg>
+      <div class="gridbg"></div>
+      <div class="glow-tr"></div>
+      <div class="br-tr"></div>
+      <div class="br-bl"></div>
+      <div class="selected-badge">✓ Selecionado</div>
+      <div class="slide-inner">
+        <div class="overline">
+          <div class="overline-bar"></div>
+          <span class="overline-text">CONCEITO</span>
+        </div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;line-height:1.05;letter-spacing:-0.01em;color:#F0EDE8;">
+          O que é um <span style="color:#FF6B00;">agente?</span>
+        </div>
+        <div class="accent-bar"></div>
+        <div class="body-text">Um agente é um LLM que pode usar <span style="color:#00F0E0;font-family:'JetBrains Mono',monospace;font-size:10px;">ferramentas</span> para completar tarefas. Planeja, executa e avalia resultados.</div>
+        <div class="code-snippet"><span style="color:#FF6B00;">const</span> agent = <span style="color:#00F0E0;">createAgent</span>({ tools, model })</div>
+        <div class="footer-row">
+          <span class="footer-sig">allan victor · @allanvictorm</span>
+          <span class="footer-sig">02 / 07</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>B — Barlow Condensed</h3>
+      <p>Técnico, militar, funciona em maiúsculo e minúsculo. Muito versátil.</p>
+    </div>
+  </div>
+
+  <!-- C: Orbitron -->
+  <div class="card" onclick="toggleCard(this, 'c')">
+    <div class="card-preview">
+      <svg class="grain" xmlns="http://www.w3.org/2000/svg"><filter id="gC"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gC)"/></svg>
+      <div class="gridbg"></div>
+      <div class="glow-tr"></div>
+      <div class="br-tr"></div>
+      <div class="br-bl"></div>
+      <div class="selected-badge">✓ Selecionado</div>
+      <div class="slide-inner">
+        <div class="overline">
+          <div class="overline-bar"></div>
+          <span class="overline-text">CONCEITO</span>
+        </div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:18px;font-weight:800;line-height:1.15;letter-spacing:0.02em;color:#F0EDE8;">
+          O que é um <span style="color:#FF6B00;">agente?</span>
+        </div>
+        <div class="accent-bar"></div>
+        <div class="body-text">Um agente é um LLM que pode usar <span style="color:#00F0E0;font-family:'JetBrains Mono',monospace;font-size:10px;">ferramentas</span> para completar tarefas. Planeja, executa e avalia resultados.</div>
+        <div class="code-snippet"><span style="color:#FF6B00;">const</span> agent = <span style="color:#00F0E0;">createAgent</span>({ tools, model })</div>
+        <div class="footer-row">
+          <span class="footer-sig">allan victor · @allanvictorm</span>
+          <span class="footer-sig">02 / 07</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>C — Orbitron</h3>
+      <p>Geométrica sci-fi declarada. Futurista sem ambiguidade — ocupa mais espaço.</p>
+    </div>
+  </div>
+
+  <!-- D: Rajdhani -->
+  <div class="card" onclick="toggleCard(this, 'd')">
+    <div class="card-preview">
+      <svg class="grain" xmlns="http://www.w3.org/2000/svg"><filter id="gD"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gD)"/></svg>
+      <div class="gridbg"></div>
+      <div class="glow-tr"></div>
+      <div class="br-tr"></div>
+      <div class="br-bl"></div>
+      <div class="selected-badge">✓ Selecionado</div>
+      <div class="slide-inner">
+        <div class="overline">
+          <div class="overline-bar"></div>
+          <span class="overline-text">CONCEITO</span>
+        </div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;line-height:1.05;letter-spacing:0.01em;color:#F0EDE8;">
+          O que é um <span style="color:#FF6B00;">agente?</span>
+        </div>
+        <div class="accent-bar"></div>
+        <div class="body-text">Um agente é um LLM que pode usar <span style="color:#00F0E0;font-family:'JetBrains Mono',monospace;font-size:10px;">ferramentas</span> para completar tarefas. Planeja, executa e avalia resultados.</div>
+        <div class="code-snippet"><span style="color:#FF6B00;">const</span> agent = <span style="color:#00F0E0;">createAgent</span>({ tools, model })</div>
+        <div class="footer-row">
+          <span class="footer-sig">allan victor · @allanvictorm</span>
+          <span class="footer-sig">02 / 07</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>D — Rajdhani</h3>
+      <p>Sharp, incomum no tech. Tem personalidade geométrica sem gritar sci-fi.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleCard(el, choice) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+
+  if (window.__companion) {
+    window.__companion.select(choice, el.querySelector('h3')?.textContent || choice);
+  }
+}
+
+// Try to hook into companion infrastructure if available
+window.__companion = null;
+</script>
+
+</body>
+</html>

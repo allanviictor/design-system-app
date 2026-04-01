@@ -1,0 +1,146 @@
+<h2>Quanto caos visual nos slides?</h2>
+<p class="subtitle">Cada opção mostra um slide de conteúdo técnico — o tipo que mais aparece no carousel</p>
+
+<div class="cards">
+
+  <!-- OPÇÃO A — Pesado -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#080808;padding:0;position:relative;overflow:hidden;min-height:320px;">
+
+      <!-- grain texture -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.18;pointer-events:none;" xmlns="http://www.w3.org/2000/svg"><filter id="grainA"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grainA)"/></svg>
+
+      <!-- scanlines -->
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.25) 2px,rgba(0,0,0,0.25) 4px);pointer-events:none;"></div>
+
+      <!-- glow blobs -->
+      <div style="position:absolute;top:-30px;right:-20px;width:160px;height:160px;background:radial-gradient(circle,rgba(255,107,0,0.22) 0%,transparent 65%);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:-20px;left:-10px;width:120px;height:120px;background:radial-gradient(circle,rgba(0,240,224,0.15) 0%,transparent 65%);pointer-events:none;"></div>
+
+      <!-- glitch bar -->
+      <div style="position:absolute;top:52px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,107,0,0.8) 25%,rgba(0,240,224,0.6) 60%,transparent);pointer-events:none;"></div>
+      <div style="position:absolute;top:54px;left:15%;right:30%;height:1px;background:rgba(255,107,0,0.3);pointer-events:none;"></div>
+
+      <div style="position:relative;padding:20px 22px;">
+        <div style="color:#FF6B00;font-size:8px;letter-spacing:0.4em;font-family:'Courier New',monospace;margin-bottom:14px;text-transform:uppercase;text-shadow:0 0 8px rgba(255,107,0,0.6);">SYS://CONCEITO · 02</div>
+
+        <div style="position:relative;margin-bottom:12px;">
+          <div style="position:absolute;color:rgba(0,240,224,0.3);font-size:19px;font-weight:900;letter-spacing:-0.03em;transform:translate(1px,1px);line-height:1.05;font-family:system-ui;">O que é um agente?</div>
+          <div style="color:#F0EDE8;font-size:19px;font-weight:900;letter-spacing:-0.03em;line-height:1.05;font-family:system-ui;position:relative;">O que é um <span style="color:#FF6B00;text-shadow:0 0 12px rgba(255,107,0,0.5);">agente?</span></div>
+        </div>
+
+        <div style="width:36px;height:2px;background:linear-gradient(90deg,#FF6B00,#00F0E0);margin-bottom:12px;"></div>
+
+        <div style="color:rgba(240,237,232,0.75);font-size:11px;line-height:1.55;font-family:system-ui;margin-bottom:12px;">Um agente é um LLM que pode usar <span style="color:#00F0E0;font-family:'Courier New',monospace;">ferramentas</span> para completar tarefas. Diferente de um chat simples, ele planeja, executa ações e avalia os resultados.</div>
+
+        <div style="background:rgba(0,0,0,0.5);border:1px solid rgba(255,107,0,0.2);border-left:2px solid #FF6B00;padding:8px 10px;font-family:'Courier New',monospace;font-size:9px;color:#9A9790;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.015) 3px,rgba(255,255,255,0.015) 4px);pointer-events:none;"></div>
+          <span style="color:#FF6B00;">const</span> agent = <span style="color:#00F0E0;">createAgent</span>({ tools, model })
+        </div>
+
+        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="color:#5C5A56;font-size:8px;font-family:'Courier New',monospace;letter-spacing:0.2em;">allan victor · @allanvictorm</span>
+          <span style="color:#5C5A56;font-size:8px;font-family:'Courier New',monospace;">02_07</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Pesado</h3>
+      <p>Grain forte, scanlines, glitch no título, glow nos acentos, código com textura. Identidade agressiva — leitura exige mais esforço.</p>
+    </div>
+  </div>
+
+  <!-- OPÇÃO B — Equilibrado -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0E0E0E;padding:0;position:relative;overflow:hidden;min-height:320px;">
+
+      <!-- grain sutil -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.07;pointer-events:none;" xmlns="http://www.w3.org/2000/svg"><filter id="grainB"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grainB)"/></svg>
+
+      <!-- grid sutil -->
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,107,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,0,0.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+
+      <!-- corner bracket -->
+      <div style="position:absolute;top:12px;right:12px;width:20px;height:20px;border-top:1px solid rgba(0,240,224,0.4);border-right:1px solid rgba(0,240,224,0.4);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:12px;left:12px;width:16px;height:16px;border-bottom:1px solid rgba(255,107,0,0.4);border-left:1px solid rgba(255,107,0,0.4);pointer-events:none;"></div>
+
+      <!-- glow suave -->
+      <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,107,0,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+
+      <div style="position:relative;padding:20px 22px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;">
+          <div style="width:2px;height:12px;background:#FF6B00;"></div>
+          <span style="color:#FF8F3F;font-size:8px;letter-spacing:0.3em;font-family:'Courier New',monospace;text-transform:uppercase;">CONCEITO</span>
+        </div>
+
+        <div style="color:#F0EDE8;font-size:20px;font-weight:800;letter-spacing:-0.03em;line-height:1.1;font-family:system-ui;margin-bottom:10px;">O que é um <span style="color:#FF6B00;">agente?</span></div>
+
+        <div style="width:32px;height:2px;background:linear-gradient(90deg,#FF6B00,#FF8F3F);margin-bottom:12px;border-radius:1px;"></div>
+
+        <div style="color:#C8C5C0;font-size:11.5px;line-height:1.6;font-family:system-ui;margin-bottom:14px;">Um agente é um LLM que pode usar <span style="color:#00F0E0;font-family:'Courier New',monospace;font-size:10.5px;">ferramentas</span> para completar tarefas. Ele planeja, executa e avalia resultados.</div>
+
+        <div style="background:#111;border:1px solid rgba(240,237,232,0.07);border-radius:6px;padding:10px 12px;font-family:'Courier New',monospace;font-size:9.5px;color:#9A9790;">
+          <span style="color:#FF6B00;">const</span> agent = <span style="color:#00F0E0;">createAgent</span>({ tools, model })
+        </div>
+
+        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="color:#5C5A56;font-size:8px;font-family:'Courier New',monospace;">allan victor · @allanvictorm</span>
+          <span style="color:#5C5A56;font-size:8px;font-family:'Courier New',monospace;">02 / 07</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Equilibrado</h3>
+      <p>Grid sutil como textura, grain leve, brackets nos cantos, tipografia com caráter. Legibilidade total, identidade presente.</p>
+    </div>
+  </div>
+
+  <!-- OPÇÃO C — Hierárquico -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0E0E0E;padding:0;position:relative;overflow:hidden;min-height:320px;">
+
+      <!-- faixa de cor no topo — identidade forte só no header -->
+      <div style="position:absolute;top:0;left:0;right:0;height:36px;background:linear-gradient(135deg,rgba(255,107,0,0.12),rgba(0,240,224,0.06));border-bottom:1px solid rgba(255,107,0,0.2);"></div>
+
+      <!-- grain só no header -->
+      <svg style="position:absolute;top:0;left:0;right:0;height:36px;width:100%;opacity:0.15;pointer-events:none;" xmlns="http://www.w3.org/2000/svg"><filter id="grainC"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grainC)"/></svg>
+
+      <div style="position:relative;padding:0 22px;">
+
+        <!-- header com identidade -->
+        <div style="height:36px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="width:5px;height:5px;background:#FF6B00;border-radius:50%;box-shadow:0 0 4px #FF6B00;"></div>
+            <span style="color:#FF8F3F;font-size:8px;letter-spacing:0.35em;font-family:'Courier New',monospace;text-transform:uppercase;">CONCEITO</span>
+          </div>
+          <span style="color:#5C5A56;font-size:8px;font-family:'Courier New',monospace;">02 / 07</span>
+        </div>
+
+        <!-- conteúdo limpo -->
+        <div style="color:#F0EDE8;font-size:20px;font-weight:800;letter-spacing:-0.03em;line-height:1.1;font-family:system-ui;margin-bottom:10px;">O que é um <span style="color:#FF6B00;">agente?</span></div>
+
+        <div style="width:32px;height:2px;background:#FF6B00;margin-bottom:12px;border-radius:1px;"></div>
+
+        <div style="color:#C8C5C0;font-size:11.5px;line-height:1.6;font-family:system-ui;margin-bottom:14px;">Um agente é um LLM que pode usar <span style="color:#00F0E0;font-family:'Courier New',monospace;font-size:10.5px;">ferramentas</span> para completar tarefas. Ele planeja, executa e avalia resultados.</div>
+
+        <div style="background:#111;border:1px solid rgba(240,237,232,0.07);border-radius:6px;padding:10px 12px;font-family:'Courier New',monospace;font-size:9.5px;color:#9A9790;margin-bottom:12px;">
+          <span style="color:#FF6B00;">const</span> agent = <span style="color:#00F0E0;">createAgent</span>({ tools, model })
+        </div>
+
+        <!-- footer com identidade sutil -->
+        <div style="border-top:1px solid rgba(255,107,0,0.12);padding-top:8px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="color:#5C5A56;font-size:8px;font-family:'Courier New',monospace;">allan victor · @allanvictorm</span>
+          <div style="display:flex;gap:2px;">
+            <div style="width:12px;height:1px;background:#FF6B00;opacity:0.5;"></div>
+            <div style="width:6px;height:1px;background:#00F0E0;opacity:0.3;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Hierárquico</h3>
+      <p>Identidade concentrada no header e footer. Corpo do slide limpo e funcional. O grit fica nos slides de capa — aqui leitura é prioridade.</p>
+    </div>
+  </div>
+
+</div>

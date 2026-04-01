@@ -1,0 +1,97 @@
+<h2>Qual sabor de cyberpunk é o seu?</h2>
+<p class="subtitle">Cyberpunk é um universo amplo. Qual dessas expressões fala mais com você?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#080808;padding:24px;position:relative;overflow:hidden;min-height:180px;font-family:'Courier New',monospace;">
+      <!-- scanlines -->
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.025) 3px,rgba(255,255,255,0.025) 4px);pointer-events:none;z-index:1;"></div>
+      <!-- noise overlay -->
+      <div style="position:absolute;inset:0;opacity:0.04;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22/><feColorMatrix type=%22saturate%22 values=%220%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22/></svg>');pointer-events:none;z-index:1;"></div>
+      <!-- glitch bar -->
+      <div style="position:absolute;top:38px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#FF6B00 30%,#FF6B00 60%,transparent 100%);opacity:0.6;z-index:2;"></div>
+      <div style="position:relative;z-index:3;">
+        <div style="color:#FF6B00;font-size:9px;letter-spacing:0.4em;margin-bottom:20px;text-transform:uppercase;">SYS://TYPESCRIPT.PATTERNS</div>
+        <div style="color:#F0EDE8;font-size:24px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;">ASYNC/<span style="color:#FF6B00;">AWAIT</span><br>PATTERNS</div>
+        <div style="margin-top:14px;display:flex;align-items:center;gap:8px;">
+          <div style="width:6px;height:6px;background:#00F0E0;border-radius:50%;box-shadow:0 0 6px #00F0E0;animation:pulse 1.5s infinite;"></div>
+          <span style="color:#00F0E0;font-size:9px;letter-spacing:0.2em;">TRANSMITTING</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Terminal / Glitch</h3>
+      <p>CRT scanlines, noise grain, glitch bars horizontais, paleta monocromática com pops de néon. Como uma tela de computador dos anos 80 invadida.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#060A10;padding:24px;position:relative;overflow:hidden;min-height:180px;">
+      <!-- city glow -->
+      <div style="position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(255,107,0,0.08) 0%,transparent 100%);pointer-events:none;"></div>
+      <div style="position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle,rgba(0,240,224,0.1) 0%,transparent 70%);pointer-events:none;"></div>
+      <!-- diagonal stripe -->
+      <div style="position:absolute;bottom:30px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,107,0,0.5),transparent);transform:rotate(-2deg);pointer-events:none;"></div>
+      <div style="position:relative;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+          <div style="width:2px;height:14px;background:#FF6B00;"></div>
+          <span style="color:#FF8F3F;font-size:9px;letter-spacing:0.3em;font-family:monospace;">IA · AGENTES · SDK</span>
+        </div>
+        <div style="color:#fff;font-size:23px;font-weight:800;line-height:1.1;letter-spacing:-0.02em;font-family:system-ui;">Programação com<br><span style="color:#FF6B00;">Agentes</span> de IA</div>
+        <div style="margin-top:16px;padding:8px 12px;border:1px solid rgba(255,107,0,0.25);border-left:2px solid #FF6B00;background:rgba(255,107,0,0.04);display:inline-block;">
+          <span style="color:#9A9790;font-size:10px;font-family:monospace;">LLM + tools + feedback loop</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Neo-Noir / Blade Runner</h3>
+      <p>Atmosfera de cidade à noite, gradientes de névoa, detalhes de néon no escuro. Referência: Blade Runner 2049, Ghost in the Shell. Sombrio e elegante.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0A0A0A;padding:24px;position:relative;overflow:hidden;min-height:180px;font-family:system-ui;">
+      <!-- grid -->
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,107,0,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,0,0.07) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;"></div>
+      <!-- corner accent -->
+      <div style="position:absolute;top:0;right:0;width:48px;height:48px;border-bottom:1px solid rgba(0,240,224,0.4);border-left:1px solid rgba(0,240,224,0.4);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:0;left:0;width:32px;height:32px;border-top:1px solid rgba(255,107,0,0.4);border-right:1px solid rgba(255,107,0,0.4);pointer-events:none;"></div>
+      <div style="position:relative;">
+        <div style="color:#00F0E0;font-size:9px;letter-spacing:0.35em;margin-bottom:4px;font-family:monospace;">CONCEITO #03</div>
+        <div style="color:#5C5A56;font-size:9px;letter-spacing:0.2em;margin-bottom:16px;font-family:monospace;">GRID:REF_A7</div>
+        <div style="color:#F0EDE8;font-size:24px;font-weight:700;letter-spacing:-0.02em;line-height:1.1;">O que é um<br><span style="color:#FF6B00;">agente?</span></div>
+        <div style="margin-top:14px;width:100%;height:1px;background:linear-gradient(90deg,rgba(255,107,0,0.5),rgba(0,240,224,0.3),transparent);"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Cyberpunk Técnico / HUD</h3>
+      <p>Grid como estrutura, cantos cortados, metadados técnicos decorativos, linha laranja-cyan como divisor. Lembra interface de heads-up display de ficção científica.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="d" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0D0008;padding:24px;position:relative;overflow:hidden;min-height:180px;font-family:system-ui;">
+      <!-- magenta glow -->
+      <div style="position:absolute;top:-30px;right:-30px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,0,128,0.12) 0%,transparent 65%);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:0;left:0;width:120px;height:120px;background:radial-gradient(circle,rgba(255,107,0,0.1) 0%,transparent 65%);pointer-events:none;"></div>
+      <!-- chromatic aberration title -->
+      <div style="position:relative;margin-bottom:6px;">
+        <div style="position:absolute;color:rgba(255,0,128,0.4);font-size:26px;font-weight:900;letter-spacing:-0.03em;transform:translate(-1px,-1px);line-height:1.05;">ASYNC/AWAIT</div>
+        <div style="position:absolute;color:rgba(0,240,224,0.4);font-size:26px;font-weight:900;letter-spacing:-0.03em;transform:translate(1px,1px);line-height:1.05;">ASYNC/AWAIT</div>
+        <div style="color:#F0EDE8;font-size:26px;font-weight:900;letter-spacing:-0.03em;line-height:1.05;position:relative;">ASYNC/<span style="color:#FF6B00;">AWAIT</span></div>
+      </div>
+      <div style="color:#F0EDE8;font-size:14px;font-weight:700;letter-spacing:-0.01em;margin-top:28px;">patterns you should know</div>
+      <div style="display:flex;gap:4px;margin-top:12px;">
+        <div style="width:20px;height:2px;background:#FF6B00;"></div>
+        <div style="width:12px;height:2px;background:#FF0080;opacity:0.6;"></div>
+        <div style="width:8px;height:2px;background:#00F0E0;opacity:0.4;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Glitch Art / Aberração Cromática</h3>
+      <p>Efeito de aberração cromática no texto, magenta como terceira cor de acento, split de camadas RGB. Mais agressivo, visual de "sistema corrompido".</p>
+    </div>
+  </div>
+
+</div>

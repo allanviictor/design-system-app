@@ -1,0 +1,63 @@
+<h2>Qual direção visual ressoa com você?</h2>
+<p class="subtitle">Pensa no seu conteúdo técnico no LinkedIn — qual dessas personalidades visuais combina com como você quer ser percebido?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0a;padding:28px 24px;font-family:'JetBrains Mono',monospace;position:relative;overflow:hidden;min-height:160px;">
+      <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.015) 2px,rgba(255,255,255,0.015) 4px);pointer-events:none;"></div>
+      <div style="color:#FF6B00;font-size:10px;letter-spacing:0.3em;margin-bottom:16px;opacity:0.7;">TYPESCRIPT · PERFORMANCE</div>
+      <div style="color:#F0EDE8;font-size:22px;font-weight:700;font-family:system-ui;line-height:1.2;margin-bottom:8px;">Async/Await <span style="color:#FF6B00;">patterns</span><br>you should know</div>
+      <div style="width:40px;height:3px;background:linear-gradient(90deg,#FF6B00,#FF8F3F);margin-top:12px;"></div>
+      <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(255,107,0,0.15),transparent 70%);border-radius:50%;"></div>
+    </div>
+    <div class="card-body">
+      <h3>Tech Editorial</h3>
+      <p>Sóbrio, autoridade técnica. Fundo quase preto, laranja como único grito. Lembra publicações técnicas premium — O'Reilly meets digital zine.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#080B14;padding:28px 24px;font-family:system-ui;position:relative;overflow:hidden;min-height:160px;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 0%,rgba(0,240,224,0.12) 0%,transparent 55%),radial-gradient(ellipse at 0% 100%,rgba(139,0,255,0.1) 0%,transparent 55%);pointer-events:none;"></div>
+      <div style="color:#00F0E0;font-size:10px;letter-spacing:0.25em;margin-bottom:16px;">IA · AGENTES · SDK</div>
+      <div style="color:#fff;font-size:22px;font-weight:800;line-height:1.15;margin-bottom:8px;">Programação com <br><span style="background:linear-gradient(90deg,#00F0E0,#8B00FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Agentes de IA</span></div>
+      <div style="display:flex;gap:6px;margin-top:14px;">
+        <span style="background:rgba(0,240,224,0.1);border:1px solid rgba(0,240,224,0.2);color:#5CE8DC;font-size:10px;padding:3px 8px;border-radius:3px;font-family:monospace;">claude</span>
+        <span style="background:rgba(139,0,255,0.1);border:1px solid rgba(139,0,255,0.2);color:#C396D8;font-size:10px;padding:3px 8px;border-radius:3px;font-family:monospace;">sdk</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Cyber / Neon Dark</h3>
+      <p>Fundo azul-noite profundo, cyan + roxo neon. Atmosfera de terminal futurista. Lembra Vercel Dark, Linear, interfaces de ficção científica.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111;padding:28px 24px;font-family:system-ui;position:relative;overflow:hidden;min-height:160px;border-bottom:3px solid #FF6B00;">
+      <div style="color:#FF6B00;font-size:11px;font-weight:700;letter-spacing:0.2em;margin-bottom:14px;font-family:monospace;">01 — CONCEITO</div>
+      <div style="color:#F0EDE8;font-size:26px;font-weight:900;line-height:1.05;letter-spacing:-0.03em;">O que é um<br><span style="color:#FF6B00;">agente?</span></div>
+      <div style="position:absolute;bottom:0;right:0;width:80px;height:80px;border-top:2px solid rgba(255,107,0,0.3);border-left:2px solid rgba(255,107,0,0.15);opacity:0.5;"></div>
+    </div>
+    <div class="card-body">
+      <h3>Brutalist / Construtivista</h3>
+      <p>Tipografia agressiva, tracking negativo, bordas como elemento estrutural. Alto contraste, zero ornamento. Lembra pôsteres Bauhaus e zines underground.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="d" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:linear-gradient(135deg,#1A0F00 0%,#0D0D0D 50%,#001A18 100%);padding:28px 24px;font-family:system-ui;position:relative;overflow:hidden;min-height:160px;">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,107,0,0.08) 1px,transparent 1px);background-size:20px 20px;pointer-events:none;"></div>
+      <div style="color:#FF8F3F;font-size:10px;letter-spacing:0.3em;margin-bottom:16px;opacity:0.8;">TYPESCRIPT · PATTERNS</div>
+      <div style="color:#F0EDE8;font-size:20px;font-weight:700;line-height:1.2;margin-bottom:12px;">Async/Await <span style="color:#FF6B00;">patterns</span><br>you should know</div>
+      <div style="width:36px;height:36px;border:1.5px solid rgba(255,107,0,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:8px;">
+        <div style="width:8px;height:8px;background:#FF6B00;border-radius:50%;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Orgânico + Técnico</h3>
+      <p>Grid sutil como textura, formas geométricas simples, gradiente quente de fundo. Mantém o laranja dominante mas adiciona profundidade e caráter artesanal.</p>
+    </div>
+  </div>
+
+</div>
