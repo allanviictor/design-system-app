@@ -14,6 +14,7 @@ export interface CoverSlide extends BaseSlide {
   highlightWords?: string[];
   subtitle: string;
   tags?: string[];
+  authorPhoto?: string;
 }
 
 export interface ContentSlide extends BaseSlide {
