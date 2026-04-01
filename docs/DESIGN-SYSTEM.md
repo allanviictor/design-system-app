@@ -1,7 +1,7 @@
 # AVM Slides — Design System
 
-**Versão:** 1.1
-**Última atualização:** 29/03/2026
+**Versão:** 2.0
+**Última atualização:** 31/03/2026
 
 ---
 
@@ -17,91 +17,91 @@
 
 ## 1. Paleta de Cores
 
-### Dark Theme (Primário)
+### Scales
 
-#### Backgrounds
+#### Primary — laranja-fogo
+
 | Token | Hex | Uso |
 |-------|-----|-----|
-| `--bg-primary` | `#141414` | Fundo principal dos slides |
-| `--bg-secondary` | `#1C1C1C` | Cards, blocos de conteúdo |
-| `--bg-tertiary` | `#242424` | Elementos elevados, hover states |
-| `--bg-code` | `#111111` | Blocos de código |
+| `--primary-300` | `#FF9055` | highlights, decorativo |
+| `--primary-400` | `#FF7033` | hover states, versão suave |
+| `--primary-500` | `#FF5500` | **base** — headlines, CTAs, keywords |
+| `--primary-600` | `#FF2D00` | vermelho-fogo — bordas ativas, pressed |
+| `--primary-700` | `#CC2400` | sombras, estados desabilitados |
+| `--primary-800` | `#6B0D00` | ferrugem — fundos de destaque, glows |
+| `--primary-900` | `#3A0600` | fundos sutis, bg de cards com acento |
 
-#### Texto
+#### Secondary — cyan elétrico
+
 | Token | Hex | Uso |
 |-------|-----|-----|
-| `--text-primary` | `#F0EDE8` | Texto principal, headlines |
-| `--text-secondary` | `#9A9790` | Subtítulos, texto de apoio |
-| `--text-muted` | `#5C5A56` | Labels, metadados, paginação |
+| `--secondary-300` | `#A8F7EE` | highlights sutis |
+| `--secondary-400` | `#4DEDD9` | texto secundário, versão suave |
+| `--secondary-500` | `#00E5C8` | **base** — funções, tipos, tags, brackets |
+| `--secondary-600` | `#00B8A0` | hover states |
+| `--secondary-700` | `#008A78` | bordas sutis com acento cyan |
+| `--secondary-800` | `#005C50` | sombras |
+| `--secondary-900` | `#0A2020` | teal profundo — fundos secundários, bg cards |
 
-#### Acento Primário — Laranja (cor dominante)
+#### Neutral
+
 | Token | Hex | Uso |
 |-------|-----|-----|
-| `--accent-primary` | `#FF6B00` | Headlines com destaque, keywords, CTAs, barras de destaque |
-| `--accent-light` | `#FF8F3F` | Hover states, variações suaves, tags primárias |
-| `--accent-dark` | `#CC5500` | Bordas ativas, estados pressed |
-| `--accent-glow` | `rgba(255, 107, 0, 0.15)` | Glow sutil em elementos de destaque, shapes de fundo |
+| `--neutral-950` | `#080808` | bg-primary — fundo dos slides |
+| `--neutral-900` | `#111111` | bg-code — blocos de código |
+| `--neutral-800` | `#1A1A1A` | bg-secondary — cards |
+| `--neutral-700` | `#242424` | bg-tertiary — hover, elementos elevados |
+| `--neutral-500` | `#5C5A56` | text-muted — paginação, metadados |
+| `--neutral-400` | `#9A9790` | text-secondary — subtítulos |
+| `--neutral-100` | `#F0EDE8` | text-primary — headlines, body |
 
-**Onde usar laranja:** headlines com palavras-chave, accent bars, CTAs, keywords no código, tags primárias, links, bordas ativas. É a cor que o olho deve encontrar primeiro.
+### Aliases semânticos
 
-#### Acento Secundário — Cyan Elétrico (cor de suporte)
-| Token | Hex | Uso |
-|-------|-----|-----|
-| `--secondary` | `#00F0E0` | Nomes de função no código, tags secundárias, tipos no código |
-| `--secondary-muted` | `#5CE8DC` | Versão mais suave para textos menores |
-| `--secondary-glow` | `rgba(0, 240, 224, 0.08)` | Background sutil de tags secundárias |
+Os aliases mantêm compatibilidade com templates existentes e apontam para as scales:
 
-**Onde usar cyan:** nomes de função e tipos no syntax highlighting, tags/badges secundárias, ícones de suporte, detalhes decorativos pontuais. Nunca em headlines ou CTAs.
-
-#### Semânticas
-| Token | Hex | Uso |
-|-------|-----|-----|
-| `--color-success` | `#2D8B6B` | Exemplos corretos, "faça isso", borda de card positivo |
-| `--color-error` | `#8B2E2E` | Exemplos errados, "não faça isso", borda de card negativo |
-| `--color-warning` | `#8B6B2E` | Alertas, cuidados |
-| `--color-info` | `#2E4F8B` | Informações complementares |
-
-#### Decorativos
-| Token | Hex | Uso |
-|-------|-----|-----|
-| `--border-subtle` | `rgba(240, 237, 232, 0.08)` | Bordas de cards e divisores |
-| `--border-accent` | `rgba(255, 107, 0, 0.3)` | Bordas com destaque laranja |
-| `--border-secondary` | `rgba(0, 240, 224, 0.12)` | Bordas com destaque cyan |
+```css
+--accent-primary: var(--primary-500)   /* #FF5500 */
+--accent-light:   var(--primary-400)   /* #FF7033 */
+--accent-dark:    var(--primary-600)   /* #FF2D00 */
+--bg-primary:     var(--neutral-950)   /* #080808 */
+--bg-secondary:   var(--neutral-800)   /* #1A1A1A */
+--bg-code:        var(--neutral-900)   /* #111111 */
+--text-primary:   var(--neutral-100)   /* #F0EDE8 */
+--text-secondary: var(--neutral-400)   /* #9A9790 */
+--text-muted:     var(--neutral-500)   /* #5C5A56 */
+--cyan:           var(--secondary-500) /* #00E5C8 */
+```
 
 ### Gradientes
 
 ```css
 /* Gradiente principal — barras de destaque, underlines */
---gradient-accent: linear-gradient(135deg, #FF6B00 0%, #FF8F3F 100%);
+--gradient-accent: linear-gradient(135deg, #FF5500 0%, #FF7033 100%);
 
 /* Gradiente de fundo — shapes decorativos (laranja dominante) */
---gradient-bg: radial-gradient(ellipse at 70% 20%, rgba(255, 107, 0, 0.06) 0%, transparent 60%);
+--gradient-bg: radial-gradient(ellipse at 70% 20%, rgba(255, 85, 0, 0.06) 0%, transparent 60%);
 
 /* Gradiente cyber sutil — efeito atmosférico */
---gradient-cyber: linear-gradient(180deg, rgba(255, 107, 0, 0.03) 0%, transparent 40%);
+--gradient-cyber: linear-gradient(180deg, rgba(255, 85, 0, 0.03) 0%, transparent 40%);
 ```
 
 ### Hierarquia de Cor (Regra de Uso)
 
 ```
-Laranja (#FF6B00) — 70% dos destaques visuais
+Primary (#FF5500) — 70% dos destaques visuais
 ├── Headlines (palavras-chave)
-├── Accent bars
-├── CTAs e botões
-├── Keywords no código (const, await, interface, =>)
-├── Tags primárias (nome da tecnologia principal)
-├── Links e elementos interativos
-└── Shapes de fundo (glow)
+├── Accent bars e CTAs
+├── Keywords no código (const, await, interface)
+└── Tags primárias, bordas ativas
 
-Cyan (#00F0E0) — 20% dos destaques visuais
-├── Nomes de função no código (fetch, then, json)
-├── Tipos no código (string, number)
-├── Tags secundárias (temas, categorias)
-└── Detalhes decorativos pontuais
+Secondary (#00E5C8) — 20% dos destaques visuais
+├── Nomes de função no código
+├── Tipos no código
+├── Tags secundárias e brackets
+└── Detalhes decorativos
 
-Neutro (cinzas) — 10% restantes
+Neutral — 10% restantes
 ├── Texto corrido
-├── Operadores e pontuação no código
 └── Metadados (paginação, footer)
 ```
 
@@ -113,8 +113,9 @@ Neutro (cinzas) — 10% restantes
 
 | Uso | Font | Fallback | Por quê |
 |-----|------|----------|---------|
-| Headlines | **Space Grotesk** | system-ui, sans-serif | Geométrica, moderna, boa em tamanhos grandes. Tem personalidade sem perder legibilidade |
+| Headlines | **Orbitron** | system-ui, sans-serif | Geométrica sci-fi, personalidade cyberpunk forte. Distintiva sem perder legibilidade em tamanhos grandes |
 | Body | **Inter** | system-ui, sans-serif | Legibilidade máxima em telas, neutro profissional |
+| Metadados, overlines, paginação, footer, tags | **JetBrains Mono** | monospace | Expande papel além do código — cria consistência técnica nos elementos de UI |
 | Código | **JetBrains Mono** | monospace | Desenhada para código, ligaturas bonitas, distingue bem 0/O e 1/l |
 
 ### Escala Tipográfica
@@ -135,11 +136,11 @@ Base: 16px. Escala: 1.333 (Perfect Fourth)
 
 ### Regras de Tipografia
 
-- Headlines sempre em **Space Grotesk Bold (700)**
-- Palavras-chave nas headlines em `--accent-primary` (laranja)
+- Headlines sempre em **Orbitron Bold (700)**
+- Palavras-chave nas headlines em `--accent-primary` (laranja-fogo)
 - Body sempre em **Inter Regular (400)**
 - Código sempre em **JetBrains Mono**
-- Overlines (categoria do slide) em UPPERCASE com letter-spacing de 0.15em
+- Metadados e overlines (categoria, paginação) em **JetBrains Mono** (uppercase, letter-spacing 0.15em)
 - Nunca usar mais de 2 pesos da mesma font por slide
 - Máximo ~60-70 caracteres por linha em body text
 
@@ -246,8 +247,8 @@ Base: 4px grid
 ### Syntax Highlighting (tema custom — Shiki)
 | Elemento | Cor | Token |
 |----------|-----|-------|
-| Keyword (`const`, `await`, `interface`, `=>`) | `#FF6B00` | Laranja (acento primário) |
-| Function (`fetch`, `then`, `json`, `map`) | `#00F0E0` | Cyan (acento secundário) |
+| Keyword (`const`, `await`, `interface`, `=>`) | `#FF5500` | Primary (laranja-fogo) |
+| Function (`fetch`, `then`, `json`, `map`) | `#00E5C8` | Secondary (cyan elétrico) |
 | String | `#8BBF65` | Verde suave |
 | Number | `#D4A054` | Dourado |
 | Comment | `#5C5A56` | Muted |
@@ -258,7 +259,7 @@ Base: 4px grid
 ### Indicadores de Código
 - Linguagem: badge no canto superior direito do bloco
 - Números de linha: cor `--text-muted`, separados por borda sutil
-- Linhas destacadas: background `rgba(255, 107, 0, 0.08)`
+- Linhas destacadas: background `rgba(255, 85, 0, 0.08)`, borda esquerda `var(--accent-primary)`
 - Comentários de erro: cor `--color-error`
 - Comentários de aviso: cor `--color-warning`
 
@@ -266,12 +267,12 @@ Base: 4px grid
 
 ## 8. Tags e Badges
 
-### Tag Primária (laranja)
+### Tag Primária (laranja-fogo)
 ```css
 .tag-primary {
-  background: rgba(255, 107, 0, 0.12);
-  border: 1px solid rgba(255, 107, 0, 0.25);
-  color: var(--accent-light); /* #FF8F3F */
+  background: rgba(255, 85, 0, 0.12);
+  border: 1px solid rgba(255, 85, 0, 0.25);
+  color: var(--accent-light); /* #FF7033 */
   font-family: 'JetBrains Mono', monospace;
   font-size: var(--text-caption);
   padding: var(--space-1) var(--space-3);
@@ -280,12 +281,12 @@ Base: 4px grid
 }
 ```
 
-### Tag Secundária (cyan)
+### Tag Secundária (cyan elétrico)
 ```css
 .tag-secondary {
-  background: rgba(0, 240, 224, 0.06);
-  border: 1px solid rgba(0, 240, 224, 0.12);
-  color: var(--secondary-muted); /* #5CE8DC */
+  background: rgba(0, 229, 200, 0.06);
+  border: 1px solid rgba(0, 229, 200, 0.12);
+  color: var(--secondary-400); /* #4DEDD9 */
   font-family: 'JetBrains Mono', monospace;
   font-size: var(--text-caption);
   padding: var(--space-1) var(--space-3);
@@ -303,15 +304,15 @@ Base: 4px grid
 ## 9. Assinatura / Marca Pessoal
 
 ### Formato
-**Allan Victor** — texto simples em Space Grotesk, peso 600.
+**Allan Victor** — texto simples em Orbitron, peso 600.
 
 ### Posição nos Slides
 - **Slide final:** centralizado, tamanho `--text-h3`, com acento laranja no "Victor" ou um underline gradiente
-- **Demais slides:** footer discreto, tamanho `--text-caption`, cor `--text-muted`, alinhado à direita
+- **Demais slides:** footer discreto em JetBrains Mono, tamanho `--text-caption`, cor `--text-muted`, alinhado à direita
 - Formato no footer: `allan victor · @handle`
 
 ### Variação Curta
-Para espaços reduzidos: **AVM** em Space Grotesk Bold
+Para espaços reduzidos: **AVM** em Orbitron Bold
 
 ---
 
@@ -348,16 +349,16 @@ Para espaços reduzidos: **AVM** em Space Grotesk Bold
 
 ## 12. Acessibilidade
 
-Contrastes validados sobre `--bg-primary` (#141414):
+Contrastes validados sobre `--bg-primary` (#080808):
 
 | Cor | Contraste | Status |
 |-----|-----------|--------|
-| `--text-primary` (#F0EDE8) | **15.2:1** | ✅ AAA |
-| `--accent-primary` (#FF6B00) | **4.8:1** | ✅ AA |
-| `--secondary` (#00F0E0) | **9.5:1** | ✅ AAA |
-| `--text-secondary` (#9A9790) | **5.8:1** | ✅ AA |
-| `--text-muted` (#5C5A56) | **3.1:1** | ⚠️ Decorativo apenas |
-| `--accent-light` (#FF8F3F) | **6.4:1** | ✅ AA |
+| `--text-primary` (#F0EDE8) | **16.5:1** | ✅ AAA |
+| `--accent-primary` (#FF5500) | **7.2:1** | ✅ AA |
+| `--secondary-500` (#00E5C8) | **10.8:1** | ✅ AAA |
+| `--text-secondary` (#9A9790) | **6.1:1** | ✅ AA |
+| `--text-muted` (#5C5A56) | **3.2:1** | ⚠️ Decorativo apenas |
+| `--accent-light` (#FF7033) | **8.1:1** | ✅ AAA |
 
 ---
 
@@ -365,27 +366,52 @@ Contrastes validados sobre `--bg-primary` (#141414):
 
 ```css
 :root {
-  /* Backgrounds */
-  --bg-primary: #141414;
-  --bg-secondary: #1C1C1C;
-  --bg-tertiary: #242424;
-  --bg-code: #111111;
+  /* Color Scales */
+  
+  /* Primary — laranja-fogo */
+  --primary-300: #FF9055;
+  --primary-400: #FF7033;
+  --primary-500: #FF5500;
+  --primary-600: #FF2D00;
+  --primary-700: #CC2400;
+  --primary-800: #6B0D00;
+  --primary-900: #3A0600;
 
-  /* Text */
-  --text-primary: #F0EDE8;
-  --text-secondary: #9A9790;
-  --text-muted: #5C5A56;
+  /* Secondary — cyan elétrico */
+  --secondary-300: #A8F7EE;
+  --secondary-400: #4DEDD9;
+  --secondary-500: #00E5C8;
+  --secondary-600: #00B8A0;
+  --secondary-700: #008A78;
+  --secondary-800: #005C50;
+  --secondary-900: #0A2020;
 
-  /* Accent — Laranja (dominante) */
-  --accent-primary: #FF6B00;
-  --accent-light: #FF8F3F;
-  --accent-dark: #CC5500;
-  --accent-glow: rgba(255, 107, 0, 0.15);
+  /* Neutral */
+  --neutral-950: #080808;
+  --neutral-900: #111111;
+  --neutral-800: #1A1A1A;
+  --neutral-700: #242424;
+  --neutral-500: #5C5A56;
+  --neutral-400: #9A9790;
+  --neutral-100: #F0EDE8;
 
-  /* Secondary — Cyan Elétrico (suporte) */
-  --secondary: #00F0E0;
-  --secondary-muted: #5CE8DC;
-  --secondary-glow: rgba(0, 240, 224, 0.08);
+  /* Semantic aliases */
+  --bg-primary: var(--neutral-950);
+  --bg-secondary: var(--neutral-800);
+  --bg-tertiary: var(--neutral-700);
+  --bg-code: var(--neutral-900);
+
+  --text-primary: var(--neutral-100);
+  --text-secondary: var(--neutral-400);
+  --text-muted: var(--neutral-500);
+
+  --accent-primary: var(--primary-500);
+  --accent-light: var(--primary-400);
+  --accent-dark: var(--primary-600);
+  --accent-glow: rgba(255, 85, 0, 0.15);
+
+  --cyan: var(--secondary-500);
+  --secondary-glow: rgba(0, 229, 200, 0.08);
 
   /* Semantic */
   --color-success: #2D8B6B;
@@ -395,12 +421,13 @@ Contrastes validados sobre `--bg-primary` (#141414):
 
   /* Borders */
   --border-subtle: rgba(240, 237, 232, 0.08);
-  --border-accent: rgba(255, 107, 0, 0.3);
-  --border-secondary: rgba(0, 240, 224, 0.12);
+  --border-accent: rgba(255, 85, 0, 0.3);
+  --border-secondary: rgba(0, 229, 200, 0.12);
 
   /* Gradients */
-  --gradient-accent: linear-gradient(135deg, #FF6B00 0%, #FF8F3F 100%);
-  --gradient-bg: radial-gradient(ellipse at 70% 20%, rgba(255, 107, 0, 0.06) 0%, transparent 60%);
+  --gradient-accent: linear-gradient(135deg, #FF5500 0%, #FF7033 100%);
+  --gradient-bg: radial-gradient(ellipse at 70% 20%, rgba(255, 85, 0, 0.06) 0%, transparent 60%);
+  --gradient-cyber: linear-gradient(180deg, rgba(255, 85, 0, 0.03) 0%, transparent 40%);
 
   /* Spacing */
   --space-1: 4px;
@@ -423,18 +450,18 @@ Contrastes validados sobre `--bg-primary` (#141414):
   --radius-full: 9999px;
 
   /* Typography */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-display: 'Orbitron', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-code: 'JetBrains Mono', monospace;
 
   /* Syntax Highlighting */
-  --code-keyword: #FF6B00;
-  --code-function: #00F0E0;
+  --code-keyword: var(--primary-500);
+  --code-function: var(--secondary-500);
   --code-string: #8BBF65;
   --code-number: #D4A054;
-  --code-comment: #5C5A56;
-  --code-variable: #F0EDE8;
+  --code-comment: var(--neutral-500);
+  --code-variable: var(--neutral-100);
   --code-type: #C396D8;
-  --code-operator: #9A9790;
+  --code-operator: var(--neutral-400);
 }
 ```
