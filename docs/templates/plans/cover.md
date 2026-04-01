@@ -1,150 +1,138 @@
 # Cover Slide — Plano de Implementação
 
 **Template:** Cover  
-**Data:** 2026-03-31  
-**Status:** Implementado
+**Data:** 2026-04-01  
+**Status:** Implementado  
+**Versão:** 2.0 — Fullscreen Photo + Content Overlay
 
 ---
 
 ## Objetivo
 
-Substituir o layout single-column genérico do `CoverSlide.tsx` por um split 50/50 horizontal com identidade Cyberpunk Tech Editorial:  
-conteúdo à esquerda, foto do autor à direita.
+Cover slide com foto em tela cheia + conteúdo sobreposto no canto inferior esquerdo. Inspirado em portfolio moderno com silhueta em iluminação quente (laranja/ouro). Identidade Cyberpunk Tech Editorial com Orbitron + Fogo + Elétrico.
 
 ---
 
 ## Layout
 
 ```
-┌─────────────────────────────────────────┐
-│ BG: grid decorativo + grain + glow blobs│
-│ ┌──────────────┬──┬─────────────────┐   │
-│ │ LEFT 50%     │1px│ RIGHT 50%      │   │
-│ │              │   │                │   │
-│ │ [overline]   │   │  [FOTO]        │   │
-│ │ [headline]   │   │  object-fit    │   │
-│ │ [accentbar]  │   │  cover         │   │
-│ │ [subtitle]   │   │                │   │
-│ │ [tags]       │   │  + vignettes   │   │
-│ │              │   │                │   │
-│ │ [footer][pag]│   │                │   │
-│ └──────────────┴───┴────────────────┘   │
-└─────────────────────────────────────────┘
+┌──────────────────────────────────────────┐
+│ FULLSCREEN PHOTO (silhueta + warm glow)  │
+│ ┌─ orange warmth overlay ─────────────┐ │
+│ │ ┌ dark vignette ┐                   │ │
+│ │ │ grain texture │                   │ │
+│ │ │                                   │ │
+│ │ │  [Content Overlay — bottom-left]  │ │
+│ │ │  • Overline                       │ │
+│ │ │  • Headline (Orbitron 900)        │ │
+│ │ │  • Accent bar                     │ │
+│ │ │  • Subtitle                       │ │
+│ │ │  • Tags                           │ │
+│ │ │  • Footer + Pagination            │ │
+│ │ │                                   │ │
+│ └───────────────────────────────────┘ │
+└──────────────────────────────────────────┘
 ```
 
 ---
 
-## Arquivos Modificados
+## Componentes & Estilos
 
-| Arquivo | Mudança |
-|---------|---------|
-| `src/features/slides/types/index.ts` | Add `authorPhoto?: string` à interface `CoverSlide` |
-| `src/features/slides/components/templates/CoverSlide.tsx` | Reescrita completa — split 50/50, inline styles |
-| `src/posts/piloto-testes/index.ts` | Somente slide cover (limpeza), com `authorPhoto` real |
+### Foto (Fullscreen Background)
+- `object-fit: cover`, `object-position: center`
+- **Warm Toning Overlay:** gradiente laranja esquerda → direita, `rgba(255,85,0,0.25)` → `0.1`
+- **Dark Vignette:** radial-gradient ellipse top-right, fade bottom-left/right
+- **Grain Overlay:** SVG inline `feTurbulence`, opacity 0.05
+
+### Content Overlay (Bottom-Left Corner)
+- Padding: `80px 64px` (top-left), `paddingRight: 55%` (afasta do lado direito)
+- Position: `absolute`, `zIndex: 10`
+
+#### Overline
+- Barra `3px × 18px` em `--primary-500` + texto JetBrains Mono
+- `color: --primary-400`, `letterSpacing: 0.3em`, UPPERCASE
+
+#### Headline
+- Orbitron 900, tamanho dinâmico (vertical/square)
+- `textShadow: 0 4px 12px rgba(8,8,8,0.8)` — legibilidade sobre foto
+- `highlightWords` → `--primary-500`
+
+#### Accent Bar
+- `64px × 4px`, gradiente laranja, shadow subtil
+
+#### Subtitle
+- Inter 400, `--text-primary` (branco), shadow para legibilidade
+
+#### Tags
+- Primeiro tag = primary, resto = secondary
+- Background opaco para contraste
+
+#### Bottom Info Bar
+- Posição: `absolute`, bottom-left
+- Layout: nome | divisor | pagination
+- Shadow para legibilidade
+
+### Placeholder (Sem Foto)
+- **Background:** gradiente teal → preto, `--secondary-900` + `--bg-primary`
+- **Grid decorativo:** `repeating-linear-gradient`, rgba laranja 8% em 60×60px
+- **Glow blobs:** radial-gradient bottom-left (laranja) + top-right (cyan)
+- **Grain:** overlay sutil
+- **Content:** mesmo layout que versão com foto
 
 ---
 
-## Props do Componente
+## Cores (Fogo + Elétrico)
 
-```typescript
-interface CoverSlideProps extends CoverSlideData {
-  format?: SlideFormat      // "vertical" | "square"
-  currentSlide: number
-  totalSlides: number
-}
+| Elemento | Token | Valor |
+|----------|-------|-------|
+| Overline bar | `--primary-500` | #FF5500 |
+| Headline accent | `--primary-500` | #FF5500 |
+| Warm overlay | rgba(255,85,0,...) | Laranja 25% |
+| Text | `--text-primary` | #F0EDE8 |
+| Accent bar gradient | `--gradient-accent` | #FF5500 → #FF7033 |
+| Placeholder BG | `--secondary-900` | #0A2020 |
 
-// CoverSlideData (types/index.ts):
-interface CoverSlide extends BaseSlide {
-  type: "cover"
-  headline: string
-  highlightWords?: string[]
-  subtitle: string
-  tags?: string[]
-  authorPhoto?: string      // URL — placeholder se omitido
-}
+---
+
+## Tipografia
+
+| Elemento | Font | Tamanho | Peso |
+|----------|------|--------|------|
+| Overline | JetBrains Mono | 12px | 600 |
+| Headline | Orbitron | 56px/42px | 900 |
+| Subtitle | Inter | 16px | 400 |
+| Tags | JetBrains Mono | 13px | - |
+| Footer | JetBrains Mono | 13px | 500 |
+
+---
+
+## Foto Utilizada
+
 ```
-
----
-
-## Canvas Background
-
-| Layer | Técnica | Valor |
-|-------|---------|-------|
-| Base | `SlideCanvas` bg | `--neutral-950` = `#080808` |
-| Grid decorativo | `repeating-linear-gradient` | `rgba(255,85,0,0.04)` 40×40px |
-| Grain | SVG inline `feTurbulence` + `filter: url(#grain)` | opacity 0.07 |
-| Glow laranja | `BgShape position="bottom-left" color="orange" size={600}` | blob radial |
-| Glow cyan | `BgShape position="top-right" color="cyan" size={400}` | blob radial |
-
----
-
-## Left Column (50%)
-
-- Padding: `8% vertical × 7% horizontal`
-- Layout: `flexDirection: column`, content em `flex: 1` centralizado, bottom row fixo
-
-| Elemento | Estilo-chave |
-|----------|-------------|
-| Overline | Barra `2px × 16px` em `--primary-500` + texto JetBrains Mono, `--primary-400`, `letter-spacing: 0.25em` |
-| Headline | Orbitron 900, `--text-display` (vertical) / `--text-h1` (square), `highlightWords` → `--accent-primary` |
-| Accent bar | `div` 54px × 3px, `background: --gradient-accent` |
-| Subtitle | Inter 400, `--text-body-sm`, `--text-secondary`, `maxWidth: 90%` |
-| Tags | `<Tag>` — first = primary, rest = secondary |
-| Footer | JetBrains Mono, `--text-caption`, `--text-muted` — "allan victor" |
-| Pagination | JetBrains Mono, `--text-caption`, `--text-muted` — "01 / 06" |
-
----
-
-## Center Divider
-
+https://images.unsplash.com/photo-1506157786151-b8491531f063?w=600&h=800&fit=crop
 ```
-width: 1px
-height: 84%
-alignSelf: center
-background: linear-gradient(to bottom,
-  transparent,
-  rgba(255,85,0,0.3),
-  rgba(0,229,200,0.2),
-  transparent
-)
-```
+Silhueta perfil aquecido em iluminação laranja/ouro — alinha visualmente com a paleta Fogo + Elétrico.
 
 ---
 
-## Right Column (flex: 1)
+## Verificação Visual
 
-- Base: `backgroundColor: var(--secondary-900)` = `#0A2020`
-- **Com foto:** `<img>` `object-fit: cover` + 3 overlay layers (vignette esquerda, vignette baixo, glow cyan top-right)
-- **Sem foto (placeholder):** círculo dashed + ícone SVG + "SUA FOTO"
-
----
-
-## Decisões Técnicas
-
-| Decisão | Motivo |
-|---------|--------|
-| `Pagination` + `SlideFooter` → inline | Ambos hardcode `position: absolute` canvas-relative — não funcionam dentro da coluna |
-| `AccentBar` → inline div | Componente não aceita `width`/`height` customizados |
-| `Overline` → inline | Componente não suporta variante laranja com barra lateral |
-| `BgShape` → reusado | Diferença de cor (`#FF6B00` vs `#FF5500`) é imperceptível a 12% opacity |
-| Grain: inline SVG `<defs>` | Sem dependência externa; auto-contido no componente |
+- [ ] Foto preenche tela cheia com bom crop
+- [ ] Overlay laranja visível nas bordas direita/topo
+- [ ] Vignette escurece canto inferior sem queimar conteúdo
+- [ ] Conteúdo legível com shadows
+- [ ] Overline com barra laranja destacada
+- [ ] Headline grande e impactante (Orbitron 900)
+- [ ] Subtitle + tags com bom contraste
+- [ ] Footer + pagination bottom-left
+- [ ] Placeholder com grid + glow blobs quando sem foto
 
 ---
 
-## Verificação
+## Decisões Arquiteturais
 
-```bash
-npm run dev        # localhost:5173 — visual check
-npm run typecheck  # sem novos erros
-```
-
-Checklist visual:
-- [ ] Split 50/50 visível
-- [ ] Overline com barra laranja à esquerda
-- [ ] Headline em Orbitron 900
-- [ ] Accent bar gradiente abaixo do título
-- [ ] Tags coloridas (primary + secondary)
-- [ ] Footer + paginação no rodapé da coluna esquerda
-- [ ] Coluna direita teal com placeholder ou foto
-- [ ] Divisória gradiente visível
-- [ ] Grid sutil no background
+1. **Foto fullscreen** — cria senso de profundidade e presença; conteúdo sobreposto é mais moderno que split 50/50
+2. **Warm toning** — laranja semi-transparente alinha com brand color primário
+3. **Content no canto inferior esquerdo** — segue padrão editorial (leitura left-to-right)
+4. **Shadows no texto** — garante legibilidade independente da foto de fundo
+5. **Placeholder com grid + glow** — mantém identidade cyberpunk mesmo sem foto

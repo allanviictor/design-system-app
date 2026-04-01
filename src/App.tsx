@@ -1,7 +1,3 @@
-import { ClosingSlide } from "@/features/slides/components/templates/ClosingSlide"
-import { CodeSlide } from "@/features/slides/components/templates/CodeSlide"
-import { ComparisonSlide } from "@/features/slides/components/templates/ComparisonSlide"
-import { ContentSlide } from "@/features/slides/components/templates/ContentSlide"
 import { CoverSlide } from "@/features/slides/components/templates/CoverSlide"
 import type { Slide } from "@/features/slides/types"
 import { pilotoTestes } from "@/posts/piloto-testes"
@@ -19,14 +15,6 @@ function renderSlide(
   switch (slide.type) {
     case "cover":
       return <CoverSlide {...slide} {...base} />
-    case "content":
-      return <ContentSlide {...slide} {...base} />
-    case "code":
-      return <CodeSlide {...slide} {...base} />
-    case "comparison":
-      return <ComparisonSlide {...slide} {...base} />
-    case "closing":
-      return <ClosingSlide {...slide} {...base} />
   }
 }
 
