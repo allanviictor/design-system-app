@@ -1,35 +1,30 @@
-interface TagProps {
-  children: React.ReactNode;
-  variant?: "primary" | "secondary";
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils"
+
+const tagVariants = cva(
+  "inline-flex items-center rounded-full font-semibold transition-colors",
+  {
+    variants: {
+      variant: {
+        orange: "bg-primary/10 text-primary border border-primary/25 font-mono text-[13px] px-4 py-1.5",
+        neutral: "bg-foreground/7 text-muted-foreground border border-foreground/10 font-mono text-[13px] px-4 py-1.5",
+      },
+    },
+    defaultVariants: {
+      variant: "orange",
+    },
+  }
+)
+
+interface TagProps extends VariantProps<typeof tagVariants> {
+  children: React.ReactNode
+  className?: string
 }
 
-const styles: Record<"primary" | "secondary", React.CSSProperties> = {
-  primary: {
-    background: "rgba(255, 107, 0, 0.12)",
-    border: "1px solid rgba(255, 107, 0, 0.25)",
-    color: "var(--accent-light)",
-  },
-  secondary: {
-    background: "rgba(0, 240, 224, 0.06)",
-    border: "1px solid rgba(0, 240, 224, 0.12)",
-    color: "var(--cyan-muted)",
-  },
-};
-
-export function Tag({ children, variant = "primary" }: TagProps) {
+export function Tag({ children, variant, className }: TagProps) {
   return (
-    <span
-      style={{
-        ...styles[variant],
-        fontFamily: "var(--font-code)",
-        fontSize: "var(--text-caption)",
-        padding: "var(--space-1) var(--space-3)",
-        borderRadius: "var(--radius-sm)",
-        textTransform: "lowercase",
-        display: "inline-block",
-      }}
-    >
+    <span className={cn(tagVariants({ variant }), className)}>
       {children}
     </span>
-  );
+  )
 }
