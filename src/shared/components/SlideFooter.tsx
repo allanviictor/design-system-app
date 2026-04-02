@@ -19,16 +19,13 @@ export function SlideFooter({
 
   return (
     <div
-      className={cn(
-        "absolute flex items-center gap-4 z-4",
-        className
-      )}
+      className={cn("absolute z-4 flex items-center gap-4", className)}
       style={style}
     >
       <span className="font-mono text-[13px] font-medium text-muted-foreground">
         {author}
       </span>
-      <div className="w-px h-4 bg-primary/25" />
+      <div className="h-4 w-px bg-primary/25" />
       <span className="font-mono text-[13px] font-medium text-muted-foreground">
         {pad(currentSlide)} / {pad(totalSlides)}
       </span>
