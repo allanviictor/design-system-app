@@ -6,8 +6,10 @@ const tagVariants = cva(
   {
     variants: {
       variant: {
-        orange: "bg-primary/10 text-primary border border-primary/25 font-mono text-[13px] px-4 py-1.5",
-        neutral: "bg-foreground/7 text-muted-foreground border border-foreground/10 font-mono text-[13px] px-4 py-1.5",
+        orange:
+          "border border-primary/25 bg-primary/10 px-4 py-1.5 text-[13px] text-primary",
+        neutral:
+          "border border-foreground/10 bg-foreground/7 px-4 py-1.5 text-[13px] text-muted-foreground",
       },
     },
     defaultVariants: {
@@ -23,8 +25,6 @@ interface TagProps extends VariantProps<typeof tagVariants> {
 
 export function Tag({ children, variant, className }: TagProps) {
   return (
-    <span className={cn(tagVariants({ variant }), className)}>
-      {children}
-    </span>
+    <span className={cn(tagVariants({ variant }), className)}>{children}</span>
   )
 }
