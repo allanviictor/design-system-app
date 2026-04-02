@@ -13,8 +13,7 @@ export const pilotoTestes: Carousel = {
       subtitle:
         "Como LLMs com ferramentas estão mudando a forma de construir software",
       tags: ["IA", "Agentes", "LLM", "TypeScript"],
-      authorPhoto:
-        "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=600&h=800&fit=crop",
+      authorPhoto: "/src/assets/foto-allan.jpg",
     },
   ],
 }

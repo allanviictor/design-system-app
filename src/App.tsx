@@ -1,4 +1,4 @@
-import { CoverSlide } from "@/features/slides/components/templates/CoverSlide"
+import { CoverSlide } from "@/features/slides/templates/CoverSlide"
 import type { Slide } from "@/features/slides/types"
 import { pilotoTestes } from "@/posts/piloto-testes"
 import { SLIDE_DIMENSIONS, SlideFormat } from "@/shared/enums/slide-format"
