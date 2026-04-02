@@ -1,11 +1,11 @@
-import { cn } from "@/lib/utils";
-import { SlideFormat, SLIDE_DIMENSIONS } from "@/shared/enums/slide-format";
+import { cn } from "@/lib/utils"
+import { SlideFormat, SLIDE_DIMENSIONS } from "@/shared/enums/slide-format"
 
 interface SlideCanvasProps {
-  format?: SlideFormat;
-  children: React.ReactNode;
-  className?: string;
-  id?: string;
+  format?: SlideFormat
+  children: React.ReactNode
+  className?: string
+  id?: string
 }
 
 export function SlideCanvas({
@@ -14,7 +14,7 @@ export function SlideCanvas({
   className,
   id,
 }: SlideCanvasProps) {
-  const { width, height } = SLIDE_DIMENSIONS[format];
+  const { width, height } = SLIDE_DIMENSIONS[format]
 
   return (
     <div
@@ -30,5 +30,5 @@ export function SlideCanvas({
     >
       {children}
     </div>
-  );
+  )
 }
