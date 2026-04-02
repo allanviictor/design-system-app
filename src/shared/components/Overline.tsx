@@ -1,21 +1,17 @@
+import { cn } from "@/lib/utils"
+
 interface OverlineProps {
-  children: React.ReactNode;
+  children: React.ReactNode
+  className?: string
 }
 
-export function Overline({ children }: OverlineProps) {
+export function Overline({ children, className }: OverlineProps) {
   return (
-    <p
-      style={{
-        fontFamily: "var(--font-code)",
-        fontSize: "var(--text-overline)",
-        color: "var(--text-muted)",
-        textTransform: "uppercase",
-        letterSpacing: "0.15em",
-        fontWeight: 600,
-        margin: 0,
-      }}
-    >
-      {children}
-    </p>
-  );
+    <div className={cn("flex items-center gap-3", className)}>
+      <div className="w-0.75 h-5 bg-primary rounded-sm shrink-0" />
+      <span className="font-mono text-[14px] font-medium uppercase tracking-[0.28em] text-primary/80">
+        {children}
+      </span>
+    </div>
+  )
 }
