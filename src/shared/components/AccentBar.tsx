@@ -1,17 +1,14 @@
+import { cn } from "@/lib/utils"
+
 interface AccentBarProps {
-  align?: "left" | "center";
+  className?: string
 }
 
-export function AccentBar({ align = "left" }: AccentBarProps) {
+export function AccentBar({ className }: AccentBarProps) {
   return (
     <div
-      style={{
-        width: 48,
-        height: 4,
-        background: "var(--gradient-accent)",
-        borderRadius: 2,
-        margin: align === "center" ? "0 auto" : undefined,
-      }}
+      className={cn("h-1.25 w-16 rounded-full", className)}
+      style={{ background: "var(--gradient-accent)" }}
     />
-  );
+  )
 }
