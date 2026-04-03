@@ -1,4 +1,4 @@
-import type { ThemeRegistrationRaw } from "shiki";
+import type { ThemeRegistrationRaw } from "shiki"
 
 export const avmDarkTheme: ThemeRegistrationRaw = {
   name: "avm-dark",
@@ -26,11 +26,7 @@ export const avmDarkTheme: ThemeRegistrationRaw = {
     },
     // Function names
     {
-      scope: [
-        "entity.name.function",
-        "support.function",
-        "meta.function-call",
-      ],
+      scope: ["entity.name.function", "support.function", "meta.function-call"],
       settings: { foreground: "#00F0E0" },
     },
     // Types and classes
@@ -99,4 +95,4 @@ export const avmDarkTheme: ThemeRegistrationRaw = {
       settings: { foreground: "#00F0E0" },
     },
   ],
-};
+}

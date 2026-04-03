@@ -1,7 +1,7 @@
 # AVM Slides — Tech Spec
 
-**Versão:** 1.0
-**Última atualização:** 25/03/2026
+**Versão:** 1.0 (v3 Brand)
+**Última atualização:** 2026-04-01
 
 ---
 
@@ -10,14 +10,13 @@
 | Camada | Tecnologia | Versão | Justificativa |
 |--------|------------|--------|---------------|
 | Build Tool | Vite | 6.x | Startup instantâneo, HMR rápido, zero config |
-| Framework | React | 19.x | Componentização, ecossistema, familiaridade |
-| Linguagem | TypeScript | 5.x | Type safety nas props dos templates |
+| Framework | React | 19.x | Componentização, ecossistema |
+| Linguagem | TypeScript | 5.x | Type safety |
 | Styling | Tailwind CSS | 4.x | Utility-first, produtividade |
-| Componentes UI | shadcn/ui | latest | Base para controles da ferramenta (botões, selects, etc.) |
-| Design Tokens | CSS Custom Properties | — | Nativo, sem runtime, fácil de tematizar |
-| Syntax Highlight | Shiki | 3.x | Highlighting no build, temas customizáveis, melhor que Prism |
-| Exportação | html-to-image | 1.x | Converte DOM para PNG no browser |
-| Fonts | Google Fonts | — | Space Grotesk, Inter, JetBrains Mono |
+| Componentes UI | shadcn/ui | latest | Base para controles |
+| Design Tokens | CSS Custom Properties | — | Nativo, sem runtime |
+| Syntax Highlight | Shiki | 3.x | Highlighting em build |
+| Fonts | Google Fonts | — | DM Sans, Inter, JetBrains Mono |
 
 ---
 
@@ -29,19 +28,15 @@
 │                                             │
 │  ┌───────────┐    ┌──────────────────────┐  │
 │  │ Controls  │    │   SlideCanvas        │  │
-│  │           │    │   (1080×1350 ou       │  │
-│  │ - Format  │    │    1080×1080)         │  │
-│  │ - Theme   │    │                      │  │
-│  │ - Export  │───▶│   [Template]          │  │
-│  │ - Navigate│    │                      │  │
+│  │           │    │   (1080×1080)        │  │
+│  │ - Theme   │───▶│                      │  │
+│  │ - Navigate│    │   [CoverSlide]       │  │
 │  │           │    │                      │  │
-│  └───────────┘    └──────────┬───────────┘  │
-│                              │              │
-│                     html-to-image           │
-│                              │              │
-│                              ▼              │
-│                        PNG 2x               │
-│                   (salvo localmente)        │
+│  └───────────┘    └──────────────────────┘  │
+│                                             │
+│              CSS Custom Properties           │
+│         (Design Tokens v1 — Light)          │
+│                                             │
 └─────────────────────────────────────────────┘
 ```
 
@@ -51,72 +46,62 @@
 Carousel Data (array de slides)
        │
        ▼
-  App.tsx (state: slideIndex, format)
+  App.tsx (state: slideIndex)
        │
-       ├──▶ Controls (navegação, formato, exportação)
+       ├──▶ Controls (navegação, tema)
        │
        └──▶ SlideCanvas
                 │
-                └──▶ Template Component (Cover, Content, Code, etc.)
+                └──▶ CoverSlide Component
                         │
-                        └──▶ Shared Components (Overline, CodeBlock, Tag, etc.)
+                        └──▶ Shared Components (Overline, Tag)
                                 │
-                                └──▶ CSS Custom Properties (tokens.css)
+                                └──▶ CSS Custom Properties (design tokens)
 ```
 
 ---
 
 ## Estrutura do Projeto
 
-Arquitetura feature-based. Cada feature é auto-contida; `shared/` guarda o que é reutilizado entre features.
+Arquitetura feature-based. Cada feature é auto-contida; `shared/` guarda o que é reutilizado.
 
 ```
 src/
 ├── features/
-│   └── slides/                        # Feature de renderização de slides
+│   └── slides/
 │       ├── components/
 │       │   ├── canvas/
-│       │   │   └── SlideCanvas.tsx    # Container 1080×1080 ou 1080×1350
+│       │   │   └── SlideCanvas.tsx         # Container 1080×1080
 │       │   └── templates/
-│       │       ├── CoverSlide.tsx
-│       │       ├── ContentSlide.tsx
-│       │       ├── CodeSlide.tsx
-│       │       ├── ComparisonSlide.tsx
-│       │       └── ClosingSlide.tsx
+│       │       └── CoverSlide.tsx          # Template de capa (v1)
 │       └── types/
-│           └── index.ts               # Slide, Carousel, SlideFormat, etc.
+│           └── index.ts                    # Slide, Carousel types
 ├── shared/
 │   ├── components/
-│   │   ├── ui/                        # shadcn/ui (gerado via CLI)
-│   │   │   └── button.tsx
+│   │   ├── ui/                             # shadcn/ui (gerado)
 │   │   ├── theme-provider.tsx
-│   │   ├── AccentBar.tsx
-│   │   ├── BgShape.tsx
-│   │   ├── CodeBlock.tsx
 │   │   ├── Overline.tsx
-│   │   ├── Pagination.tsx
-│   │   ├── SlideFooter.tsx
 │   │   └── Tag.tsx
 │   └── lib/
-│       ├── avm-theme.ts               # Tema Shiki com cores da marca
-│       ├── shiki.ts                   # Singleton do highlighter
-│       └── highlight.tsx              # Helper de highlight de palavras
+│       ├── avm-theme.ts                    # Tema Shiki
+│       ├── shiki.ts                        # Singleton highlighter
+│       └── highlight.tsx                   # Helper highlight
 ├── lib/
-│   └── utils.ts                       # cn() — mantido aqui por shadcn
+│   └── utils.ts                            # cn() helper
 ├── posts/
 │   └── piloto-testes/
-│       └── index.ts                   # Dados do carousel (título, slides[])
+│       └── index.ts                        # Carousel data
 ├── App.tsx
 ├── main.tsx
-└── index.css                          # Design tokens + Shiki reset
+└── index.css                               # Design tokens v1
 ```
 
-### Regras de import
+### Regras de Import
 
-- Cross-feature e cross-layer: sempre `@/` absoluto
-- Dentro de `features/slides`: relativo (ex: `../canvas/SlideCanvas`)
-- Novos componentes shadcn: `npx shadcn@latest add <c>` → geram em `@/shared/components/ui/` (configurado em `components.json`)
-- Sem barrel files (`index.ts` de re-export) — importar direto do arquivo fonte
+- Cross-feature: sempre `@/` absoluto
+- Dentro de features: relativo preferencialmente
+- Sem barrel files — importar direto do arquivo
+- shadcn/ui: geram em `@/shared/components/ui/`
 
 ---
 
@@ -124,149 +109,115 @@ src/
 
 ### 1. SlideCanvas
 
-O componente mais importante. Renderiza os slides no tamanho exato para exportação.
+Container que renderiza slides no tamanho exato.
 
 ```typescript
-// Conceito — não é código final
 interface SlideCanvasProps {
-  format: 'vertical' | 'square';
   children: React.ReactNode;
+  format?: 'square';  // v1 suporta apenas square
 }
 
-// Dimensões reais do slide
-const DIMENSIONS = {
-  vertical: { width: 1080, height: 1350 },
-  square:   { width: 1080, height: 1080 },
-};
+// Dimensões
+const SLIDE_WIDTH = 1080;
+const SLIDE_HEIGHT = 1080;
 
-// No browser, renderiza escalado (ex: 50%) para caber na tela
-// Na exportação, renderiza em 1x e exporta em 2x via pixelRatio
+// No browser: renderiza em 50% scale para caber na tela
+// CSS: transform: scale(0.5);
 ```
 
-**Estratégia de escala:** O canvas renderiza no tamanho real (1080px de largura) e é escalado via CSS `transform: scale()` para caber na viewport. Na hora de exportar, o html-to-image captura o elemento no tamanho real.
+**Estratégia de escala:** O canvas renderiza no tamanho real (1080px) e é escalado via `transform: scale()` para preview. Assim a proporção visível é realista.
 
-### 2. Exportação PNG
+### 2. Design Tokens (CSS Custom Properties)
 
-```typescript
-// lib/export.ts
-import { toPng } from 'html-to-image';
+Arquivo `src/index.css` define todos os tokens:
 
-export async function exportSlide(
-  element: HTMLElement,
-  filename: string
-): Promise<void> {
-  // Aguardar fonts carregarem
-  await document.fonts.ready;
+```css
+:root {
+  /* Tipografia */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  const dataUrl = await toPng(element, {
-    pixelRatio: 2,        // 2x para alta resolução
-    quality: 1.0,
-    cacheBust: true,      // Evitar cache de imagens
-    skipAutoScale: true,
-  });
+  /* Primary — Orange Quente */
+  --primary-700: #CC4A00;
+  --primary-600: #E55A00;
+  --primary-500: #FF6B00;  /* base */
+  --primary-400: #FF7A45;
+  --primary-300: #FF8A3D;
 
-  // Trigger download
-  const link = document.createElement('a');
-  link.download = `${filename}.png`;
-  link.href = dataUrl;
-  link.click();
+  /* Background — Off-White Warm */
+  --bg-primary: #FAF8F3;   /* base */
+  --bg-secondary: #F5F3EE;
+  --bg-tertiary: #F0EDE8;
+  --bg-light: #FEFDFB;
+
+  /* Text — Dark */
+  --text-primary: #141414;
+  --text-secondary: #5C5A56;
+  --text-muted: #9A9790;
+
+  /* Aliases */
+  --accent-primary: var(--primary-500);
+  --accent-light: var(--primary-300);
+  --accent-dark: var(--primary-600);
 }
 ```
-
-**Cuidados:**
-- Fonts devem estar completamente carregadas antes de exportar (`document.fonts.ready`)
-- `pixelRatio: 2` gera imagem 2160×2700 (vertical) ou 2160×2160 (quadrado)
-- Gradientes e box-shadows podem ter inconsistências — testar no MVP
 
 ### 3. Syntax Highlighting com Shiki
 
 ```typescript
-// lib/shiki.ts
-import { createHighlighter } from 'shiki';
-
-// Tema custom baseado nos tokens do design system
-const avmTheme = {
-  name: 'avm-dark',
+// lib/avm-theme.ts
+export const avmTheme = {
+  name: 'avm-light',
   colors: {
-    'editor.background': '#12121A',
+    'editor.background': '#FAF8F3',
+    'editor.foreground': '#141414',
   },
   tokenColors: [
-    { scope: 'keyword', settings: { foreground: '#E8742A' } },
-    { scope: 'string', settings: { foreground: '#8BBF65' } },
-    { scope: 'comment', settings: { foreground: '#5C5A56' } },
-    { scope: 'entity.name.function', settings: { foreground: '#5BA3D9' } },
-    // ... demais tokens do DESIGN-SYSTEM.md
+    { scope: 'keyword', settings: { foreground: '#FF6B00' } },
+    { scope: 'string', settings: { foreground: '#008A78' } },
+    // ... demais tokens
   ],
 };
-
-export async function initHighlighter() {
-  return createHighlighter({
-    themes: [avmTheme],
-    langs: ['javascript', 'typescript', 'html', 'css', 'jsx', 'tsx', 'json', 'bash'],
-  });
-}
 ```
 
 ### 4. Dados do Carousel
 
 ```typescript
-// lib/types.ts
-type SlideType = 'cover' | 'content' | 'code' | 'comparison' | 'closing';
-
-interface BaseSlide {
-  type: SlideType;
-  overline?: string;
-}
-
-interface CoverSlide extends BaseSlide {
+// types/index.ts
+interface CoverSlide {
   type: 'cover';
+  overline: string;
   headline: string;
   highlightWords?: string[];
   subtitle: string;
   tags?: string[];
+  authorPhoto?: string;
 }
 
-// ... demais tipos (ver SLIDE-TEMPLATES.md)
-
-type Slide = CoverSlide | ContentSlide | CodeSlide | ComparisonSlide | ClosingSlide;
+type Slide = CoverSlide;  // v1: apenas Cover
 
 interface Carousel {
+  title: string;
   slides: Slide[];
-  format: 'vertical' | 'square';
-  theme: 'dark';  // 'light' no futuro
+  format: 'square';  // v1: apenas square
 }
 ```
 
 ```typescript
-// data/sample-carousel.ts
-export const sampleCarousel: Carousel = {
-  format: 'vertical',
-  theme: 'dark',
+// posts/piloto-testes/index.ts
+export const pilotoTestes: Carousel = {
+  title: 'Programação com Agentes de IA',
+  format: 'square',
   slides: [
     {
       type: 'cover',
-      overline: 'REACT · PERFORMANCE',
-      headline: 'Por que useEffect quebra seu app',
-      highlightWords: ['useEffect'],
-      subtitle: 'Entenda o ciclo de vida e evite re-renders desnecessários',
-      tags: ['React', 'Hooks', 'Performance'],
-    },
-    {
-      type: 'content',
-      overline: 'O PROBLEMA',
-      headline: 'useEffect roda após cada render.',
-      highlightWords: ['cada render'],
-      body: [
-        'Quando você não passa um array de dependências, o useEffect executa depois de toda atualização do componente.',
-        'Isso pode causar loops infinitos, chamadas HTTP duplicadas e problemas sérios de performance.',
-      ],
-    },
-    // ... mais slides
-    {
-      type: 'closing',
-      cta: 'Curtiu? Salva pra consultar depois.',
-      handle: '@allanvictor',
-      actions: ['Curta', 'Comente', 'Compartilhe'],
+      overline: 'IA · AGENTES · SDK',
+      headline: 'Programação com Agentes de IA',
+      highlightWords: ['Agentes'],
+      subtitle: 'Como LLMs com ferramentas estão mudando a forma de construir software',
+      tags: ['IA', 'Agentes', 'LLM', 'TypeScript'],
+      authorPhoto: 'url-da-foto.jpg',
     },
   ],
 };
@@ -274,56 +225,46 @@ export const sampleCarousel: Carousel = {
 
 ---
 
-## Setup Inicial (Comandos)
+## Setup Inicial
 
 ```bash
-# 1. Criar projeto
-npm create vite@latest avm-slides -- --template react-ts
-
-# 2. Instalar dependências
-cd avm-slides
+# 1. Instalar dependências
 npm install
 
-# 3. Tailwind CSS
+# 2. Tailwind CSS (já configurado)
 npm install tailwindcss @tailwindcss/vite
 
-# 4. shadcn/ui (para controles da ferramenta)
+# 3. shadcn/ui (para UI controls)
 npx shadcn@latest init
 
-# 5. Dependências core
-npm install html-to-image shiki
+# 4. Dependências core
+npm install shiki
 
-# 6. Rodar
+# 5. Rodar dev server
 npm run dev
 ```
 
 ---
 
-## Google Fonts (Loading)
+## Google Fonts Loading
 
-Incluir no `index.html`:
+Incluir em `index.css`:
 
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+```css
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 ```
-
-**Importante para exportação:** Fonts do Google Fonts carregam via CSS que referencia arquivos externos. O html-to-image pode ter problemas com isso. Se acontecer, auto-hospedar as fonts em `/public/fonts/` e usar `@font-face` local.
 
 ---
 
-## Workflow do Dia a Dia
+## Workflow do MVP
 
 ```
-1. Allan quer criar um post
-2. Abre o projeto: cd avm-slides && npm run dev
-3. Cria/edita arquivo em src/data/ com o conteúdo do carousel
-4. Browser mostra preview em tempo real (hot reload)
-5. Navega entre slides, ajusta conteúdo
-6. Alterna formato se necessário (vertical ↔ quadrado)
-7. Exporta cada slide como PNG
-8. Upload no LinkedIn como carousel (PDF ou imagens)
+1. Allan abre o projeto: npm run dev
+2. Edita arquivo em src/posts/piloto-testes/index.ts
+3. Browser mostra preview em tempo real (hot reload)
+4. Ajusta conteúdo, headlines, tags
+5. Itera até estar satisfeito visualmente
+6. Conteúdo pronto para usar/customizar
 ```
 
 ---
@@ -332,19 +273,28 @@ Incluir no `index.html`:
 
 | Decisão | Alternativa | Por que essa |
 |---------|-------------|--------------|
-| Vite (não Next.js) | Next.js, CRA | Não precisa de SSR, projeto local |
-| CSS Custom Properties (não CSS-in-JS) | styled-components, Emotion | Zero runtime, funciona com html-to-image |
-| Shiki (não Prism) | Prism, highlight.js | Highlighting em build, temas como JSON, melhor qualidade |
-| html-to-image (não Puppeteer) | Puppeteer, Playwright | Mais simples, roda no browser, sem deps de sistema |
-| Tailwind (não CSS modules) | CSS modules, SCSS | Produtividade, utility-first, bom com tokens CSS |
-| Dados como TS (não CMS) | JSON, MDX, Supabase | Type-safe, autocomplete, zero infra |
+| Vite (não Next.js) | Next.js, CRA | Projeto local, sem SSR |
+| CSS Custom Properties | styled-components | Zero runtime, simples |
+| Tema Light Only | Light + Dark | MVP foca em light primeiro |
+| Apenas Square (v1) | Vertical + Square | Quadrado valida design |
+| Sem Exportação | html-to-image | Foco em design primeiro |
+| Dados em TS | JSON, CMS | Type-safe, autocomplete |
 
 ---
 
-## Limitações Conhecidas
+## Limitações Conhecidas (v1)
 
-1. **html-to-image + fonts externas:** Pode falhar com Google Fonts CDN. Solução: auto-hospedar.
-2. **html-to-image + gradientes complexos:** Gradientes radiais com blur podem não renderizar 100%. Testar e simplificar se necessário.
-3. **Shiki bundle size:** Shiki com muitas linguagens pode pesar. Carregar apenas as linguagens necessárias.
-4. **Sem persistência:** Dados vivem no código-fonte. Perder o arquivo = perder o conteúdo. Mitigação: git.
-5. **Exportação manual:** Um slide por vez no MVP. V1.1 terá batch export.
+1. **Formato único:** Apenas 1080×1080. Vertical vem em v1.1.
+2. **Um template:** Apenas Cover. Demais templates em v1.1+.
+3. **Sem persistência:** Dados vivem no código. Perder arquivo = perder conteúdo. Use git.
+4. **Sem exportação:** Visualização apenas. PNG export em v1.1.
+5. **Sem dark theme:** Light theme apenas. Dark theme em iteração futura.
+
+---
+
+## Próximas Iterações
+
+- **v1.1:** Exportação PNG
+- **v1.2:** Demais templates (Content, Code, etc.)
+- **v1.3:** Formato vertical (1080×1350)
+- **v2.0:** Dark theme, integração Claude API

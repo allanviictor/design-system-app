@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { getHighlighter, highlight } from "@/shared/lib/shiki";
+import { useEffect, useState } from "react"
+import { getHighlighter, highlight } from "@/shared/lib/shiki"
 
 interface CodeBlockProps {
-  code: string;
-  language: string;
-  highlightLines?: number[];
-  showLineNumbers?: boolean;
-  maxLines?: number;
+  code: string
+  language: string
+  highlightLines?: number[]
+  showLineNumbers?: boolean
+  maxLines?: number
 }
 
 export function CodeBlock({
@@ -16,21 +16,19 @@ export function CodeBlock({
   showLineNumbers = true,
   maxLines,
 }: CodeBlockProps) {
-  const [html, setHtml] = useState<string>("");
+  const [html, setHtml] = useState<string>("")
 
   const displayCode = maxLines
     ? code.split("\n").slice(0, maxLines).join("\n")
-    : code;
-  const wasTruncated = maxLines
-    ? code.split("\n").length > maxLines
-    : false;
+    : code
+  const wasTruncated = maxLines ? code.split("\n").length > maxLines : false
 
   useEffect(() => {
     getHighlighter().then((h) => {
-      const result = highlight(h, displayCode, language, highlightLines);
-      setHtml(result);
-    });
-  }, [displayCode, language, highlightLines]);
+      const result = highlight(h, displayCode, language, highlightLines)
+      setHtml(result)
+    })
+  }, [displayCode, language, highlightLines])
 
   return (
     <div
@@ -124,5 +122,5 @@ export function CodeBlock({
         </div>
       </div>
     </div>
-  );
+  )
 }

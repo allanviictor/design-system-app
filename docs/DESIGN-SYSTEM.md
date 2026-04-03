@@ -1,125 +1,271 @@
-# Brand & Design System — Spec
+# Brand & Design System — v1
 
-**Data:** 2026-03-31
+**Data:** 2026-04-01
 **Status:** Aprovado
 
 ---
 
 ## Contexto
 
-O design system atual (v1) usa Space Grotesk + laranja/cyan genéricos e foi avaliado como sem personalidade suficiente. O objetivo é evoluir para uma identidade visual **Cyberpunk Tech Editorial** — grit controlado, tipografia com caráter sci-fi, paleta quente com tensão fria.
+AVM Slides é uma aplicação React para gerar carousel slides LinkedIn como exportações PNG. O design system define a identidade visual e tokens de design para toda a aplicação.
 
-Os elementos visuais cyberpunk (grain, grid, brackets, glows nos slides) são fora de escopo nesta fase — serão tratados numa iteração futura de refatoração dos templates.
+**Filosofia:** Minimalista + Moderno Editorial — clean, direto ao ponto, com personalidade através de tipografia elegante e cor quente suave.
 
 ---
 
 ## Direção Visual
 
-**Estilo:** Tech Editorial com grit cyberpunk equilibrado
-**Peso visual:** Identidade presente via tipografia e cor — corpo dos slides limpo e legível
-**Referência:** Paleta de tensão quente/fria (laranja-fogo vs cyan elétrico), tipografia geométrica sci-fi
+**Estilo:** Minimalista + Moderno Editorial
+**Tema:** Light (apenas light theme nesta versão)
+**Peso Visual:** Identidade presente via tipografia sem-serifa com personalidade e cor primária marcante
+**Composição:** Limpa, legível, pensada para slides LinkedIn
 
 ---
 
 ## Tipografia
 
-| Papel | Fonte | Peso | Mudança |
-|---|---|---|---|
-| Headlines | **Orbitron** | 700/900 | Substitui Space Grotesk |
-| Body | **Inter** | 400 | Mantido |
-| Metadados, overlines, paginação, footer, tags | **JetBrains Mono** | 500 | Expande papel (antes só código) |
-| Código | **JetBrains Mono** | 400 | Mantido |
+### Fonte Primária — Headlines
 
-- Space Grotesk é removido completamente
-- Orbitron carregado via Google Fonts: `family=Orbitron:wght@700;900`
-- `--font-display` atualizado de `'Space Grotesk'` para `'Orbitron'`
+**DM Sans** — 700 (bold)
+- Uso: Títulos, headlines, elementos de destaque
+- Carregamento: Google Fonts `family=DM+Sans:wght@700`
+- Caráter: Editorial, versátil, elegante, humanista
+- Razão: Equilibra modernidade com personalidade, lê bem em todos os tamanhos
+
+### Fonte Secundária — Body & UI
+
+**Inter** — 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
+- Uso: Corpo de texto, descrições, metadados, UI
+- Carregamento: Google Fonts `family=Inter:wght@400;500;600;700`
+- Caráter: Clean, altamente legível, neutra
+- Razão: Máxima legibilidade e acessibilidade
+
+### Fonte de Código
+
+**JetBrains Mono** — 400 (regular), 500 (medium)
+- Uso: Blocos de código, snippets, monospace contexts
+- Carregamento: Google Fonts `family=JetBrains+Mono:wght@400;500`
+- Caráter: Monoespacial, técnico, claro
+
+### Implementação em CSS
+
+```css
+--font-sans: 'Inter', system-ui, sans-serif;
+--font-heading: 'DM Sans', system-ui, sans-serif;
+--font-mono: 'JetBrains Mono', monospace;
+```
 
 ---
 
 ## Paleta de Cores
 
-### Primary — laranja-fogo
+### Primary — Orange Quente
+
+Cor de marca que transmite energia, calor e presença.
+
+| Token | Hex | Peso | Papel |
+|---|---|---|---|
+| `--primary-700` | `#CC4A00` | Escuro | Disabled, dark variant |
+| `--primary-600` | `#E55A00` | Médio Escuro | Pressed, active states |
+| **`--primary-500`** | **`#FF6B00`** | **Base** | **Headlines, CTAs, accents** |
+| `--primary-400` | `#FF7A45` | Médio Claro | Hover states |
+| `--primary-300` | `#FF8A3D` | Claro | Highlights, decorativo |
+
+**Cor Base:** `#FF6B00` — laranja quente, vibrante, marca presença sem ser agressivo
+
+### Background — Off-White Warm
+
+Backgrounds neutros e acessíveis que complementam a cor primária.
 
 | Token | Hex | Papel |
 |---|---|---|
-| `--primary-300` | `#FF9055` | highlights, decorativo |
-| `--primary-400` | `#FF7033` | hover states |
-| `--primary-500` | `#FF5500` | ★ base — headlines, CTAs, keywords |
-| `--primary-600` | `#FF2D00` | ★ vermelho-fogo — bordas ativas, pressed |
-| `--primary-700` | `#CC2400` | sombras, estados desabilitados |
-| `--primary-800` | `#6B0D00` | ★ ferrugem — fundos de destaque, glows |
-| `--primary-900` | `#3A0600` | fundos sutis, bg de cards com acento |
+| `--bg-light` | `#FEFDFB` | Subtle backgrounds, secundário |
+| **`--bg-primary`** | **`#FAF8F3`** | **Base — Fundo dos slides** |
+| `--bg-secondary` | `#F5F3EE` | Cards, elevated surfaces |
+| `--bg-tertiary` | `#F0EDE8` | Hover, interactive surfaces |
 
-### Secondary — cyan elétrico
+**Cor Base:** `#FAF8F3` — off-white quente com tom cream
 
-| Token | Hex | Papel |
-|---|---|---|
-| `--secondary-300` | `#A8F7EE` | highlights sutis |
-| `--secondary-400` | `#4DEDD9` | texto secundário, versão suave |
-| `--secondary-500` | `#00E5C8` | ★ base — funções, tipos, tags, brackets |
-| `--secondary-600` | `#00B8A0` | hover states |
-| `--secondary-700` | `#008A78` | bordas sutis |
-| `--secondary-800` | `#005C50` | sombras |
-| `--secondary-900` | `#0A2020` | ★ teal profundo — fundos secundários, bg cards |
+### Text — Dark/Neutral
 
-### Neutros
+Paleta de texto para máxima legibilidade em backgrounds light.
 
 | Token | Hex | Papel |
 |---|---|---|
-| `--neutral-950` | `#080808` | bg-primary — fundo dos slides |
-| `--neutral-900` | `#111111` | bg-code — blocos de código |
-| `--neutral-800` | `#1A1A1A` | bg-secondary — cards |
-| `--neutral-700` | `#242424` | bg-tertiary — hover, elevados |
-| `--neutral-500` | `#5C5A56` | text-muted — paginação, metadados |
-| `--neutral-400` | `#9A9790` | text-secondary — subtítulos |
-| `--neutral-100` | `#F0EDE8` | text-primary — headlines, body |
+| **`--text-primary`** | **`#141414`** | **Headlines, primary text** |
+| `--text-secondary` | `#5C5A56` | Body text, descriptions |
+| `--text-muted` | `#9A9790` | Metadata, secondary info, hints |
 
-### Aliases semânticos (mantidos por compatibilidade)
+### Aliases Semânticos
 
-Os aliases existentes apontam para as novas scales:
+Tokens mnemônicos que facilitam uso em componentes:
 
 ```css
---accent-primary:   var(--primary-500);
---accent-light:     var(--primary-400);
---accent-dark:      var(--primary-600);
---accent-glow:      rgba(255, 85, 0, 0.15);
+/* Accent */
+--accent-primary:   var(--primary-500);   /* #FF6B00 */
+--accent-light:     var(--primary-300);   /* #FF8A3D */
+--accent-dark:      var(--primary-600);   /* #E55A00 */
+--accent-glow:      rgba(255, 107, 0, 0.12);
 
---secondary:        var(--secondary-500);
---secondary-muted:  var(--secondary-400);
---secondary-glow:   rgba(0, 229, 200, 0.08);
+/* Background */
+--bg-primary:       var(--bg-primary);    /* #FAF8F3 */
+--bg-secondary:     var(--bg-secondary);  /* #F5F3EE */
+--bg-tertiary:      var(--bg-tertiary);   /* #F0EDE8 */
 
---bg-primary:       var(--neutral-950);
---bg-secondary:     var(--neutral-800);
---bg-tertiary:      var(--neutral-700);
---bg-code:          var(--neutral-900);
-
---text-primary:     var(--neutral-100);
---text-secondary:   var(--neutral-400);
---text-muted:       var(--neutral-500);
+/* Text */
+--text-primary:     var(--text-primary);  /* #141414 */
+--text-secondary:   var(--text-secondary); /* #5C5A56 */
+--text-muted:       var(--text-muted);    /* #9A9790 */
 ```
 
-Aliases semânticos de cor permitem que os templates existentes continuem funcionando sem alteração.
+---
+
+## Espaçamento & Radius
+
+### Espaçamento (Escala de 8px)
+
+```css
+--spacing-xs:  0.5rem;  /* 8px */
+--spacing-sm:  1rem;    /* 16px */
+--spacing-md:  1.5rem;  /* 24px */
+--spacing-lg:  2rem;    /* 32px */
+--spacing-xl:  3rem;    /* 48px */
+--spacing-2xl: 4rem;    /* 64px */
+```
+
+### Border Radius
+
+```css
+--radius-sm:   4px;
+--radius-md:   8px;
+--radius-lg:   12px;
+--radius-xl:   16px;
+--radius-2xl:  24px;
+--radius-full: 9999px;
+```
 
 ---
 
-## Arquivos que mudam
+## Dimensões dos Slides
 
-| Arquivo | O que muda |
+### Suportados
+
+| Formato | Dimensões | Uso |
+|---|---|---|
+| **Vertical** | 1080 × 1350px | LinkedIn carousel padrão |
+| **Square** | 1080 × 1080px | Instagram, tweets, geral |
+
+Slide canvas renderiza em tamanho real (1080px) e é escalado via `transform: scale()` para preview.
+
+---
+
+## Componentes & Padrões
+
+### Estrutura de Componentes
+
+```
+src/
+├── features/
+│   └── slides/
+│       ├── components/
+│       │   ├── canvas/SlideCanvas.tsx
+│       │   └── templates/
+│       │       ├── CoverSlide.tsx
+│       │       ├── ContentSlide.tsx
+│       │       ├── CodeSlide.tsx
+│       │       ├── ComparisonSlide.tsx
+│       │       └── ClosingSlide.tsx
+│       └── types/index.ts
+├── shared/
+│   ├── components/
+│   │   ├── ui/                    (shadcn/ui)
+│   │   ├── theme-provider.tsx
+│   │   └── (AccentBar, BgShape, CodeBlock, etc.)
+│   └── lib/
+│       ├── avm-theme.ts           (Shiki syntax highlight)
+│       ├── shiki.ts               (highlighter singleton)
+│       └── highlight.tsx          (word highlight helper)
+└── lib/
+    └── utils.ts                   (cn() helper)
+```
+
+### Estilo de Inline Styles em Templates
+
+Slide templates usam **inline styles** (não Tailwind classes) porque `html-to-image` não processa classes. Padrão:
+
+```tsx
+<div style={{
+  fontFamily: 'var(--font-heading)',
+  fontSize: '52px',
+  fontWeight: 700,
+  color: 'var(--text-primary)',
+  lineHeight: 1.1,
+}}>
+  Título do Slide
+</div>
+```
+
+---
+
+## Convenções de Código
+
+### Imports
+
+- **Path alias:** `@/` mapeia para `src/` — usar para imports cross-feature
+- **Dentro de features:** imports relativos preferencialmente
+- **Sem barrel files:** importar direto do arquivo fonte, não de `index.ts` re-exports
+
+### shadcn/ui Components
+
+Adicionar com: `npx shadcn@latest add <component>`
+
+Gera em: `@/shared/components/ui/`
+
+Merge classes com: `cn()` de `@/lib/utils`
+
+### Tipografia & Temas
+
+- **Slide canvas é sempre dark** — tokens de marca (`--bg-primary`, etc.) definidos em `:root`
+- **App UI segue tema** — light/dark via `theme-provider.tsx`
+- Pressionar `d` para toggle tema
+
+### Formatação
+
+- **Prettier:** sem semicolons, double quotes, 2-space indent, trailing commas (ES5)
+- **TypeScript:** strict mode, sem unused locals/params
+- **ESLint:** run com `npm run lint`
+
+---
+
+## Arquivos Chave
+
+| Arquivo | Responsabilidade |
 |---|---|
-| `src/index.css` | Import do Orbitron, remoção do Space Grotesk, nova paleta de scales, atualização de aliases, `--font-display` |
-| `docs/DESIGN-SYSTEM.md` | Seções de paleta e tipografia atualizadas |
-
-**Fora de escopo:**
-- Templates de slides (`CoverSlide`, `ContentSlide`, etc.)
-- Componentes compartilhados (`AccentBar`, `SlideCanvas`, etc.)
-- Posts em `src/posts/`
-- `tailwind.config` / `components.json` (não requerem mudança — consomem os aliases CSS que serão atualizados)
+| [src/index.css](../src/index.css) | Tokens de design, imports de fonte, reset Shiki |
+| [src/shared/components/theme-provider.tsx](../src/shared/components/theme-provider.tsx) | Context tema light/dark/system |
+| [src/lib/utils.ts](../src/lib/utils.ts) | `cn()` helper (clsx + tailwind-merge) |
+| [src/shared/lib/avm-theme.ts](../src/shared/lib/avm-theme.ts) | Shiki theme customizado com cores marca |
+| [docs/SLIDE-TEMPLATES.md](./SLIDE-TEMPLATES.md) | Specs de layout para cada template |
+| [docs/TECH-SPEC.md](./TECH-SPEC.md) | Decisões arquiteturais, stack, limitações |
 
 ---
 
-## Critérios de sucesso
+## Critérios de Sucesso
 
-- Slides renderizam com Orbitron nos headlines
-- Cor de destaque visível é `#FF5500` (não mais `#FF6B00`)
-- Todos os aliases semânticos funcionam — nenhum template quebra
-- `npm run build` passa sem erros
+- ✅ Slides renderizam com DM Sans nos headlines
+- ✅ Cor primária é `#FF6B00` (orange quente)
+- ✅ Background padrão é `#FAF8F3` (off-white warm)
+- ✅ Todos os aliases semânticos funcionam
+- ✅ Templates não quebram com nova paleta
+- ✅ `npm run build` passa sem erros
+- ✅ Identidade visual alinha com minimalista + moderno editorial
+- ✅ Composição é limpa e legível em todos os tamanhos
+
+---
+
+## Próximas Iterações
+
+- Dark theme (light theme é prioritário agora)
+- Paleta de cores secundária (se necessário)
+- Ícones e ilustrações customizadas
+- Animações e micro-interações

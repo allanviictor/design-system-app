@@ -1,10 +1,10 @@
-import { createHighlighter, type Highlighter } from "shiki";
-import { avmDarkTheme } from "./avm-theme";
+import { createHighlighter, type Highlighter } from "shiki"
+import { avmDarkTheme } from "./avm-theme"
 
-let highlighter: Highlighter | null = null;
+let highlighter: Highlighter | null = null
 
 export async function getHighlighter(): Promise<Highlighter> {
-  if (highlighter) return highlighter;
+  if (highlighter) return highlighter
 
   highlighter = await createHighlighter({
     themes: [avmDarkTheme],
@@ -19,9 +19,9 @@ export async function getHighlighter(): Promise<Highlighter> {
       "bash",
       "python",
     ],
-  });
+  })
 
-  return highlighter;
+  return highlighter
 }
 
 export function highlight(
@@ -38,11 +38,11 @@ export function highlight(
           {
             line(node, line) {
               if (highlightLines.includes(line)) {
-                node.properties["data-highlighted"] = "true";
+                node.properties["data-highlighted"] = "true"
               }
             },
           },
         ]
       : undefined,
-  });
+  })
 }

@@ -1,63 +1,55 @@
 # AVM Slides — Slide Templates Specification
 
-**Versão:** 2.0
-**Última atualização:** 31/03/2026
+**Versão:** 1.0 (v3 Brand)
+**Última atualização:** 2026-04-01
 
 ---
 
 ## Visão Geral
 
-Cada template é um componente React que recebe props de conteúdo e renderiza dentro de um `SlideCanvas`. Todos compartilham os mesmos tokens de design.
+Cada template é um componente React que recebe props de conteúdo e renderiza dentro de `SlideCanvas`. Todos compartilham os mesmos tokens de design (DM Sans, orange #FF6B00, background #FAF8F3).
 
-**Escopo atual:** apenas o template de Capa (Cover Slide) está especificado. Os demais templates serão definidos em iterações futuras.
-
-### Componentes Compartilhados
-
-| Componente | Função |
-|------------|--------|
-| `SlideCanvas` | Container com dimensões fixas (1080×1080), background, grain e grid decorativos |
-| `Overline` | Categoria do slide (uppercase, letter-spacing, JetBrains Mono, `--text-muted`) |
-| `AccentBar` | Barra gradiente horizontal de 48×3px |
-| `Pagination` | Indicador "01 / 08" no canto inferior direito |
-| `SlideFooter` | Assinatura "allan victor · @allanvictorm" no canto inferior esquerdo |
-| `Tag` | Badge com label (ex: "IA", "SDK") |
+**MVP Scope:** Apenas o template **Cover Slide** está implementado nesta versão. Demais templates serão especificados em v1.1+.
 
 ---
 
-## Template 1: Capa (Cover Slide)
+## Componentes Compartilhados (v1)
+
+| Componente | Função |
+|------------|--------|
+| `SlideCanvas` | Container com dimensões fixas (1080×1080), background light |
+| `Overline` | Categoria do slide (uppercase, letter-spacing, Inter 500, `--text-muted`) |
+| `Tag` | Badge com label estilizada |
+
+---
+
+## Template 1: Cover Slide
 
 **Propósito:** Slide de abertura. Atrai atenção no feed, comunica o tema e apresenta o autor.
 
 ### Layout
 
-Split 50/50 horizontal — conteúdo à esquerda, foto à direita, separados por linha vertical sutil.
+Composição vertical com título, subtítulo, tags e foto (opcional).
 
 ```
-┌──────────────────────┬──────────────────────┐
-│                      │                      │
-│  ── OVERLINE         │                      │
-│                      │                      │
-│  HEADLINE            │                      │
-│  com palavra         │      [FOTO]          │
-│  em laranja          │                      │
-│  ─── (accent bar)    │                      │
-│                      │                      │
-│  Subtítulo 1-2       │                      │
-│  linhas              │                      │
-│                      │                      │
-│  [tag1] [tag2]       │                      │
-│                      │                      │
-│  footer       01/06  │                      │
-└──────────────────────┴──────────────────────┘
+┌────────────────────────────────────┐
+│                                    │
+│  ── OVERLINE                       │
+│                                    │
+│  HEADLINE em DM Sans               │
+│  com palavra em orange             │
+│                                    │
+│  ─── accent bar orange             │
+│                                    │
+│  Subtítulo descritivo              │
+│  em Inter, 1-2 linhas              │
+│                                    │
+│  [tag1] [tag2] [tag3]              │
+│                                    │
+│  (foto com vignette opcional)      │
+│                                    │
+└────────────────────────────────────┘
 ```
-
-### Estrutura de colunas
-
-| Coluna | Largura | Conteúdo |
-|--------|---------|----------|
-| Esquerda | 50% | Overline, headline, accent bar, subtitle, tags, footer, paginação |
-| Divisor | 1px | Linha vertical com gradiente `primary-500` → `secondary-500` |
-| Direita | 50% | Foto do autor (com vignette nos cantos) |
 
 ### Props
 
@@ -68,44 +60,47 @@ interface CoverSlideProps {
   highlightWords?: string[];  // Palavras da headline em --primary-500
   subtitle: string;           // 1-2 frases descritivas
   tags?: string[];            // Ex: ["IA", "Agentes", "SDK"]
-  authorPhoto?: string;       // URL da foto (opcional — mostra placeholder se omitido)
-  currentSlide: number;
-  totalSlides: number;
-  format: SlideFormat;        // Square (1080×1080) apenas por ora
+  authorPhoto?: string;       // URL da foto (opcional — placeholder se omitido)
+  currentSlide?: number;      // Para paginação (futura)
+  totalSlides?: number;       // Para paginação (futura)
 }
 ```
 
-### Regras visuais
+### Regras Visuais
 
-**Lado esquerdo:**
-- Padding: 7% horizontal, 8% vertical
-- Overline: barra vertical 2px `--primary-500` + texto JetBrains Mono, `--primary-400`, letter-spacing 0.25em, uppercase
-- Headline: Orbitron 900, `--neutral-100`, palavras em `highlightWords` recebem `--primary-500`
-- AccentBar: 10% da largura da coluna, gradiente `primary-500` → `primary-600`, 3px altura
-- Subtitle: Inter 400, `--neutral-400`, font-size `--text-body-sm`, line-height 1.6
-- Tags: primárias em `--primary-500` (bg rgba primary-500 10%), secundárias em `--secondary-400` (bg rgba secondary-500 6%), JetBrains Mono
-- Footer e paginação: JetBrains Mono, `--neutral-500`
+**Tipografia:**
+- Overline: Inter 500, `--text-muted`, uppercase, letter-spacing 1.5px
+- Headline: DM Sans 700, `--text-primary`, 52px, line-height 1.1
+  - `highlightWords` recebem `--primary-500` (#FF6B00)
+- Subtitle: Inter 400, `--text-secondary`, 18px, line-height 1.6
+- Tags: Inter 500, 13px, `--primary-500` com bg rgba(#FF6B00, 0.1)
 
-**Divisor:**
-- Posição: `top: 8%`, `bottom: 8%`, `left: 50%`
-- 1px de largura
-- Gradiente vertical: `transparent → rgba(primary-500, 0.3) → rgba(secondary-500, 0.2) → transparent`
+**Cores:**
+- Background: `--bg-primary` (#FAF8F3)
+- Accent bar: `--primary-500` (#FF6B00), 6px altura
+- Texto: `--text-primary` (#141414), `--text-secondary` (#5C5A56)
 
-**Lado direito:**
-- Fundo: `--secondary-900` como base
-- Foto ocupa 100% do container
-- Vignette da esquerda: `linear-gradient(to right, rgba(bg-primary, 0.5) 0%, transparent 30%)`
-- Vignette inferior: `linear-gradient(to top, rgba(bg-primary, 0.7) 0%, transparent 25%)`
-- Glow cyan sutil no canto superior: `radial-gradient(ellipse, rgba(secondary-500, 0.08))`
-- Se `authorPhoto` não fornecido: exibe placeholder com ícone e texto "SUA FOTO"
+**Layout:**
+- Padding: 40px-50px (horizontal), 40px-60px (vertical)
+- Espaçamento vertical entre elementos: 20-30px
+- Accent bar: 80px de largura
+- Tags: gap 10px, flex-wrap
 
-**Fundo geral:**
-- `--neutral-950` (`#080808`)
-- Grid decorativo: `linear-gradient` 1px em `rgba(primary-500, 0.04)`, 40×40px
-- Grain SVG: `feTurbulence`, opacity 7%
-- Glow blob laranja: `radial-gradient` canto inferior esquerdo, `rgba(primary-500, 0.12)`
-- Glow blob cyan: `radial-gradient` canto superior direito, `rgba(secondary-500, 0.08)`
+**Foto (opcional):**
+- Se fornecida: renderiza com vignette suave
+- Se não: placeholder com ícone/texto
+- Max-height: 300px, object-fit cover
 
-### Nota de evolução
+### Notas de Evolução
 
-O layout Split 50/50 é a versão inicial. Ajustes visuais (proporção de colunas, tratamento da foto, elementos decorativos adicionais) serão feitos em iterações futuras após validação com foto real.
+Este é o template inicial do MVP. Refinamentos visuais (proporções, spacing, efeitos) serão feitos em iterações futuras com feedback visual.
+
+---
+
+## Futuros Templates (v1.1+)
+
+Serão especificados quando necessário:
+- **Content Slide** — Conteúdo + bullet points
+- **Code Slide** — Bloco de código com syntax highlighting
+- **Comparison Slide** — Lado a lado (antes/depois, A/B)
+- **Closing Slide** — CTA e encerramento

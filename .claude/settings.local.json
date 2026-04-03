@@ -1,10 +1,23 @@
 {
   "permissions": {
     "allow": [
+      "Bash(cd:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(tree:*)",
+      "Bash(pwd:*)",
       "Bash(npm install:*)",
       "WebSearch",
       "Bash(npm run:*)",
-      "Bash(curl -sI \"https://images.unsplash.com/photo-1506157786151-b8491531f063?w=600&h=800&fit=crop\")"
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(curl -sI \"https://images.unsplash.com/photo-1506157786151-b8491531f063?w=600&h=800&fit=crop\")",
+      "Bash(npx vite:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

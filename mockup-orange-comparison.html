@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparação Orange 2 vs Orange 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f5f5;
+            padding: 40px 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #141414;
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .comparison-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 1400px) {
+            .comparison-wrapper {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .comparison-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: #FAF8F3;
+            border-radius: 16px;
+            padding: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-label {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .badge-2 {
+            background: #FF7A45;
+        }
+
+        .badge-3 {
+            background: #FF8A3D;
+        }
+
+        .badge-4 {
+            background: #FF6B00;
+        }
+
+        .accent-bar {
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 35px;
+            width: 80px;
+        }
+
+        .overline {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            opacity: 0.7;
+        }
+
+        .headline {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            flex-grow: 1;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Orange 2 Card */
+        .card-orange-2 .headline {
+            color: #FF7A45;
+        }
+
+        .card-orange-2 .subtitle {
+            color: #5C5A56;
+        }
+
+        .card-orange-2 .accent-bar {
+            background: #FF7A45;
+        }
+
+        .card-orange-2 .overline {
+            color: #5C5A56;
+        }
+
+        .card-orange-2 .tag {
+            background: rgba(255, 122, 69, 0.12);
+            color: #FF7A45;
+        }
+
+        /* Orange 3 Card */
+        .card-orange-3 .headline {
+            color: #FF8A3D;
+        }
+
+        .card-orange-3 .subtitle {
+            color: #5C5A56;
+        }
+
+        .card-orange-3 .accent-bar {
+            background: #FF8A3D;
+        }
+
+        .card-orange-3 .overline {
+            color: #5C5A56;
+        }
+
+        .card-orange-3 .tag {
+            background: rgba(255, 138, 61, 0.12);
+            color: #FF8A3D;
+        }
+
+        /* Orange 4 Card - Quente Intenso (seu perfil) */
+        .card-orange-4 .headline {
+            color: #FF6B00;
+        }
+
+        .card-orange-4 .subtitle {
+            color: #5C5A56;
+        }
+
+        .card-orange-4 .accent-bar {
+            background: #FF6B00;
+        }
+
+        .card-orange-4 .overline {
+            color: #5C5A56;
+        }
+
+        .card-orange-4 .tag {
+            background: rgba(255, 107, 0, 0.12);
+            color: #FF6B00;
+        }
+
+        /* Comparison Details */
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        @media (max-width: 1024px) {
+            .details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .detail-section h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #141414;
+        }
+
+        .detail-list {
+            list-style: none;
+        }
+
+        .detail-list li {
+            font-size: 14px;
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            color: #5C5A56;
+            line-height: 1.6;
+        }
+
+        .detail-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .detail-section-orange2 .detail-list li::before {
+            color: #FF7A45;
+        }
+
+        .detail-section-orange3 .detail-list li::before {
+            color: #FF8A3D;
+        }
+
+        .detail-section-orange4 .detail-list li::before {
+            color: #FF6B00;
+        }
+
+        .color-spec {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .color-spec-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .color-spec-value {
+            font-family: 'Inter', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .color-spec-swatch {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .recommendation {
+            background: #fff8f0;
+            border-left: 4px solid #FF8A3D;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #5C5A56;
+        }
+
+        .recommendation strong {
+            color: #141414;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Orange 2 vs Orange 3 vs Orange 4 — Comparação</h1>
+
+        <div class="comparison-wrapper">
+            <!-- Orange 2 Card -->
+            <div class="card card-orange-2">
+                <div class="card-label">
+                    <span class="badge badge-2"></span>
+                    Orange 2 — Coral Morno
+                </div>
+                <div class="accent-bar"></div>
+                <div class="overline">IA · AGENTES · SDK</div>
+                <div class="headline">Programação com Agentes de IA</div>
+                <div class="subtitle">
+                    Como LLMs com ferramentas estão mudando a forma de construir software
+                </div>
+                <div class="tags">
+                    <div class="tag">IA</div>
+                    <div class="tag">Agentes</div>
+                    <div class="tag">LLM</div>
+                    <div class="tag">TypeScript</div>
+                </div>
+            </div>
+
+            <!-- Orange 3 Card -->
+            <div class="card card-orange-3">
+                <div class="card-label">
+                    <span class="badge badge-3"></span>
+                    Orange 3 — Orange Médio
+                </div>
+                <div class="accent-bar"></div>
+                <div class="overline">IA · AGENTES · SDK</div>
+                <div class="headline">Programação com Agentes de IA</div>
+                <div class="subtitle">
+                    Como LLMs com ferramentas estão mudando a forma de construir software
+                </div>
+                <div class="tags">
+                    <div class="tag">IA</div>
+                    <div class="tag">Agentes</div>
+                    <div class="tag">LLM</div>
+                    <div class="tag">TypeScript</div>
+                </div>
+            </div>
+
+            <!-- Orange 4 Card - Do seu perfil -->
+            <div class="card card-orange-4">
+                <div class="card-label">
+                    <span class="badge badge-4"></span>
+                    Orange 4 — Seu Perfil
+                </div>
+                <div class="accent-bar"></div>
+                <div class="overline">IA · AGENTES · SDK</div>
+                <div class="headline">Programação com Agentes de IA</div>
+                <div class="subtitle">
+                    Como LLMs com ferramentas estão mudando a forma de construir software
+                </div>
+                <div class="tags">
+                    <div class="tag">IA</div>
+                    <div class="tag">Agentes</div>
+                    <div class="tag">LLM</div>
+                    <div class="tag">TypeScript</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Comparison -->
+        <div class="details" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="detail-section detail-section-orange2">
+                <h3>Orange 2 — Coral Morno (#FF7A45)</h3>
+                <ul class="detail-list">
+                    <li>Tom mais rosado, sofisticado</li>
+                    <li>Mais suave e elegante</li>
+                    <li>Menos agressivo que o Orange 3</li>
+                    <li>Evoca calor controlado</li>
+                    <li>Melhor para designs premium</li>
+                    <li>Menos presença visual</li>
+                </ul>
+                <div class="color-spec">
+                    <div class="color-spec-title">Código Hex</div>
+                    <div class="color-spec-value">#FF7A45</div>
+                    <div class="color-spec-swatch">
+                        <div class="swatch" style="background: #FF7A45;"></div>
+                        <span>Coral Morno</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section detail-section-orange3">
+                <h3>Orange 3 — Orange Médio (#FF8A3D)</h3>
+                <ul class="detail-list">
+                    <li>Tom mais puro e vibrante</li>
+                    <li>Mais presença visual</li>
+                    <li>Energético mas controlado</li>
+                    <li>Maior impacto nos slides</li>
+                    <li>Melhor para destaque/CTAs</li>
+                    <li>Mantém elegância minimalista</li>
+                </ul>
+                <div class="color-spec">
+                    <div class="color-spec-title">Código Hex</div>
+                    <div class="color-spec-value">#FF8A3D</div>
+                    <div class="color-spec-swatch">
+                        <div class="swatch" style="background: #FF8A3D;"></div>
+                        <span>Orange Médio</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section detail-section-orange4">
+                <h3>Orange 4 — Seu Perfil (#FF6B00)</h3>
+                <ul class="detail-list">
+                    <li>Tom bem quente e vibrante</li>
+                    <li>Muito mais presença visual</li>
+                    <li>Energético e marcante</li>
+                    <li>Máximo impacto nos slides</li>
+                    <li>Conecta com sua identidade</li>
+                    <li>Pode ser muito agressivo</li>
+                </ul>
+                <div class="color-spec">
+                    <div class="color-spec-title">Código Hex</div>
+                    <div class="color-spec-value">#FF6B00</div>
+                    <div class="color-spec-swatch">
+                        <div class="swatch" style="background: #FF6B00;"></div>
+                        <span>Seu Perfil</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recommendation">
+            <strong>💡 Recomendação:</strong>
+            <ul style="margin-top: 12px; margin-left: 0; list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 8px;">🥇 <strong>Orange 3 (#FF8A3D)</strong> — Melhor equilíbrio entre elegância minimalista e presença visual. Vibrante sem ser agressivo.</li>
+                <li style="margin-bottom: 8px;">🥈 <strong>Orange 4 (#FF6B00)</strong> — Conecta com sua identidade pessoal, mas pode ser agressivo em backgrounds light.</li>
+                <li style="margin-bottom: 0;">🥉 <strong>Orange 2 (#FF7A45)</strong> — Mais suave e sofisticado, mas pode desaparecer em tamanhos pequenos.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,10 +1,10 @@
 interface PaginationProps {
-  current: number;
-  total: number;
+  current: number
+  total: number
 }
 
 export function Pagination({ current, total }: PaginationProps) {
-  const pad = (n: number) => String(n).padStart(2, "0");
+  const pad = (n: number) => String(n).padStart(2, "0")
 
   return (
     <span
@@ -19,5 +19,5 @@ export function Pagination({ current, total }: PaginationProps) {
     >
       {pad(current)} / {pad(total)}
     </span>
-  );
+  )
 }

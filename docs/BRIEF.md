@@ -1,8 +1,8 @@
 # AVM Slides — Design System & Slide Builder
 
-**Data:** 31/03/2026
+**Data:** 2026-04-01
 **Autor:** Allan Victor de Moura
-**Status:** Building
+**Status:** v1 Brand Implementation
 
 ---
 
@@ -19,17 +19,17 @@ Devs que produzem conteúdo no LinkedIn geralmente usam Canva ou ferramentas gen
 ## Solução
 
 **Em uma frase:**
-> Um design system pessoal implementado como projeto React local que gera capas e slides para LinkedIn com identidade visual única, otimizados para exportação como imagem.
+> Um design system pessoal implementado como projeto React local que renderiza slides para LinkedIn com identidade visual minimalista + moderna, pronto para visualizar e iterar.
 
 **Como funciona:**
-Projeto Vite + React que renderiza slides HTML usando tokens de design pré-definidos (cores, tipografia, espaçamento). O dev seleciona um template, insere o conteúdo, visualiza em tempo real e exporta como PNG em alta resolução. No futuro, integra com IA para gerar o conteúdo automaticamente.
+Projeto Vite + React que renderiza slides HTML usando tokens de design pré-definidos (cores, tipografia, espaçamento). O dev edita um arquivo de dados, visualiza em tempo real com hot reload, e itera até estar satisfeito visualmente. No futuro, integra com IA para gerar conteúdo automaticamente.
 
 ---
 
 ## Público-Alvo
 
 **Persona principal:**
-> Allan Victor — dev frontend que quer se posicionar no LinkedIn com conteúdo técnico e acessível, atingindo tanto devs juniores quanto seniores.
+> Allan Victor — dev frontend que quer se posicionar no LinkedIn com conteúdo técnico e acessível, com identidade visual clara e elegant.
 
 **Early adopters:**
 > O próprio Allan. Este é um projeto de ferramenta pessoal (dogfooding). Pode ser aberto como open-source futuramente.
@@ -39,7 +39,7 @@ Projeto Vite + React que renderiza slides HTML usando tokens de design pré-defi
 ## Proposta de Valor
 
 **Por que isso e não Canva/PowerPoint?**
-> Identidade visual 100% própria, otimizada para conteúdo técnico (syntax highlighting, blocos de código), com workflow integrado ao ecossistema dev.
+> Identidade visual 100% própria, otimizada para conteúdo técnico, com workflow integrado ao ecossistema dev e controle total sobre design.
 
 **Alternativas atuais:**
 - Canva: genérico, sem suporte a código, perde identidade
@@ -47,79 +47,118 @@ Projeto Vite + React que renderiza slides HTML usando tokens de design pré-defi
 
 **Diferenciais:**
 - Design system como código (versionável, replicável, consistente)
-- Templates pré-prontos para conteúdo técnico
-- Exportação otimizada para LinkedIn (dimensões, resolução)
+- Template de capa pronto para validar a identidade
+- Workflow simplificado: editar → visualizar → iterar
 
 ---
 
-## Identidade Visual
+## Identidade Visual v1
 
-**Direção:** Cyberpunk Tech Editorial — grit controlado, tipografia sci-fi, paleta quente com tensão fria.
+### Direção
+**Minimalista + Moderno Editorial** — Clean, direto ao ponto, com personalidade através de tipografia elegante e cor quente suave.
 
-**Tipografia:**
-- Headlines: **Orbitron** 700/900
-- Body: **Inter** 400
-- Metadados, overlines, código: **JetBrains Mono** 400/500
+### Tipografia
+- **Headlines:** DM Sans 700 — Editorial elegante com personalidade
+- **Body:** Inter 400/500 — Máxima legibilidade
+- **Código/Mono:** JetBrains Mono 400/500 — Técnico, claro
 
-**Paleta principal:**
-- `--primary-500: #FF5500` — laranja-fogo (headlines, CTAs, keywords)
-- `--primary-600: #FF2D00` — vermelho-fogo (bordas ativas, pressed)
-- `--primary-800: #6B0D00` — ferrugem (fundos de destaque)
-- `--secondary-500: #00E5C8` — cyan elétrico (funções, tipos, tags)
-- `--secondary-900: #0A2020` — teal profundo (fundos secundários)
-- `--neutral-950: #080808` — fundo dos slides
+### Paleta de Cores
+- **Primary (Orange Quente):** `#FF6B00` — Vibrant, marca presença sem agressividade
+- **Background (Off-White Warm):** `#FAF8F3` — Cream quentinho, acessível
+- **Text Primary:** `#141414` — Dark, alta legibilidade
+- **Text Secondary:** `#5C5A56` — Subtle, suportante
+- **Accent Variations:** `#FF7A45` (hover), `#FF8A3D` (light), `#E55A00` (pressed)
 
-**Hierarquia de cor:** primary em ~70% dos destaques, secondary em ~20%.
+### Filosofia
+Identidade visual que transmite:
+- **Clareza:** Tipografia sem-serifa moderna e legível
+- **Calor:** Orange quente que conecta com personalidade
+- **Elegância:** Composição minimalista, sem poluição visual
+- **Acessibilidade:** Alto contraste, tons neutros, fácil leitura
 
 ---
 
 ## Métricas de Sucesso
 
 **North Star Metric:**
-> Tempo médio para criar um slide completo (meta: < 15 min)
+> Conseguir criar uma capa visualmente atrativa e alinhada com a identidade em menos de 10 minutos
 
-**Metas iniciais:**
-- [ ] Design system v2 implementado (nova paleta + Orbitron)
-- [ ] Template de capa funcional com foto do autor
-- [ ] 12+ posts publicados usando o sistema (2/semana × 6 semanas)
+**Metas do v1 MVP:**
+- [ ] Design system v1 implementado (DM Sans + orange #FF6B00 + off-white #FAF8F3)
+- [ ] Template Cover pronto e funcional
+- [ ] Preview em tempo real funcionando
+- [ ] Tema light consistente
+- [ ] Primeira capa criada e validada
+
+**Metas pós-MVP (v1.1+):**
+- [ ] Exportação PNG de alta resolução
+- [ ] Demais templates (Content, Code, Comparison, Closing)
+- [ ] Suporte formato vertical (1080×1350)
+- [ ] Dark theme como variante
 
 ---
 
 ## MVP Scope
 
-**O que entra:**
-- Design system v2 (tokens de cor scales numéricas, Orbitron, espaçamento)
-- Template de capa (cover slide) com layout split 50/50 e foto do autor
-- Suporte formato quadrado (1080×1080)
-- Dark mode (tema primário)
-- Exportação HTML → PNG via html-to-image
+### O que ENTRA
 
-**O que NÃO entra:**
-- Outros templates de slide (conteúdo, código, comparação, fechamento) — v1.1
-- Light mode — v1.1
-- Integração com IA — v2
-- CMS/painel de gerenciamento
-- Deploy público
-- Animações
+| Feature | Descrição |
+|---------|-----------|
+| Design System v1 | Tokens CSS com DM Sans + orange #FF6B00 + off-white #FAF8F3 |
+| Template: Cover | Slide de capa com suporte a foto/placeholder |
+| Preview em Tempo Real | Hot reload do conteúdo |
+| Tema Light | Todos componentes em tema light |
+| Slide Canvas | Container 1080×1080 pixel-perfect |
+
+### O que NÃO ENTRA
+
+| Feature | Motivo | Quando |
+|---------|--------|--------|
+| Exportação PNG | Focus é visualização primeiro | v1.1 |
+| Demais Templates | Cover valida identidade | v1.1+ |
+| Formato Vertical | Quadrado é suficiente MVP | v1.1+ |
+| Dark Theme | Light é prioridade agora | v2.0 |
+| Deploy Público | Ferramenta pessoal local | Futuro |
+| CMS/Dashboard | Over-engineering | Se escalar |
 
 ---
 
-## Stack
+## Stack Tecnológico
 
-| Camada | Tecnologia |
-|--------|------------|
-| Build Tool | Vite |
-| UI | React + TypeScript |
-| Styling | Tailwind CSS |
-| Componentes | shadcn/ui (base) |
-| Syntax Highlight | Shiki |
-| Exportação | html-to-image |
-| Fonts | Google Fonts (Orbitron, Inter, JetBrains Mono) |
+| Camada | Tecnologia | Justificativa |
+|--------|------------|---------------|
+| Build | Vite | Startup rápido, zero config |
+| UI | React + TypeScript | Componentização, type safety |
+| Styling | Tailwind CSS | Utility-first, produtividade |
+| Componentes | shadcn/ui | Base consistente |
+| Design Tokens | CSS Custom Properties | Nativo, sem runtime |
+| Syntax Highlight | Shiki | Highlighting de código |
+| Fonts | Google Fonts | DM Sans, Inter, JetBrains Mono |
+
+### O que NÃO usar
+- ~~html-to-image~~ (v1.1 para exportação)
+- ~~State management externo~~ (React state é suficiente)
+- ~~Backend/API~~ (tudo local)
+- ~~Dark theme~~ (light only no MVP)
+
+---
+
+## Fluxo Crítico (MVP)
+
+```
+1. Allan abre o projeto: npm run dev
+2. Edita dados do slide em src/posts/piloto-testes/index.ts
+3. Visualiza no browser com hot reload
+4. Ajusta tipografia, cores, conteúdo
+5. Itera até estar visualmente satisfeito
+6. Capa pronta para usar/customizar
+```
 
 ---
 
 ## Notas
 
-- Foto do autor ainda será editada — template usa placeholder até foto final estar pronta
-- Elementos visuais cyberpunk avançados (grain, grid, brackets nos slides) serão ajustados na refatoração de templates
-- Futuro: integração com Claude/IA para gerar conteúdo + slides automaticamente via prompt
+- **Foto do autor:** Template suporta placeholder até foto final estar pronta
+- **Iteração de design:** Focus é refinar o template Cover baseado em feedback visual
+- **Próximas features:** Exportação PNG, demais templates, dark theme vêm depois de validação
+- **Futura integração IA:** Claude API para gerar conteúdo + montar slides automaticamente via prompt
