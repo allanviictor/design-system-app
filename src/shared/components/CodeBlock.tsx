@@ -1,5 +1,5 @@
+import { getHighlighter, highlight } from "@/lib/shiki"
 import { useEffect, useState } from "react"
-import { getHighlighter, highlight } from "@/shared/lib/shiki"
 
 interface CodeBlockProps {
   code: string

@@ -68,26 +68,32 @@ Arquitetura feature-based. Cada feature é auto-contida; `shared/` guarda o que 
 ```
 src/
 ├── features/
+│   ├── canvas/
+│   │   └── SlideCanvas.tsx                 # Container 1080×1080
 │   └── slides/
-│       ├── components/
-│       │   ├── canvas/
-│       │   │   └── SlideCanvas.tsx         # Container 1080×1080
-│       │   └── templates/
-│       │       └── CoverSlide.tsx          # Template de capa (v1)
+│       ├── templates/
+│       │   └── CoverSlide.tsx              # Template de capa (v1)
 │       └── types/
 │           └── index.ts                    # Slide, Carousel types
 ├── shared/
 │   ├── components/
-│   │   ├── ui/                             # shadcn/ui (gerado)
-│   │   ├── theme-provider.tsx
+│   │   ├── ui/                             # shadcn/ui (gerado, kebab-case)
+│   │   ├── AccentBar.tsx
+│   │   ├── BgShape.tsx
+│   │   ├── CodeBlock.tsx
 │   │   ├── Overline.tsx
+│   │   ├── Pagination.tsx
+│   │   ├── SlideFooter.tsx
 │   │   └── Tag.tsx
-│   └── lib/
-│       ├── avm-theme.ts                    # Tema Shiki
-│       ├── shiki.ts                        # Singleton highlighter
-│       └── highlight.tsx                   # Helper highlight
+│   ├── enums/
+│   │   └── slide-format.ts                 # SlideFormat enum + SLIDE_DIMENSIONS
+│   └── utils/
+│       └── highlight.tsx                   # Helper highlight (função pura)
 ├── lib/
-│   └── utils.ts                            # cn() helper
+│   ├── utils.ts                            # cn() helper
+│   ├── ThemeProvider.tsx                   # Context tema light/dark/system
+│   ├── avm-theme.ts                        # Tema Shiki
+│   └── shiki.ts                            # Singleton highlighter
 ├── posts/
 │   └── piloto-testes/
 │       └── index.ts                        # Carousel data
@@ -96,12 +102,15 @@ src/
 └── index.css                               # Design tokens v1
 ```
 
-### Regras de Import
+### Regras de Import e Nomeação
 
 - Cross-feature: sempre `@/` absoluto
 - Dentro de features: relativo preferencialmente
 - Sem barrel files — importar direto do arquivo
-- shadcn/ui: geram em `@/shared/components/ui/`
+- shadcn/ui: geram em `@/shared/components/ui/` (kebab-case, não renomear)
+- **Componentes React (`.tsx`):** PascalCase — `ThemeProvider.tsx`, `SlideCanvas.tsx`
+- **Módulos não-componentes (`.ts`):** kebab-case — `slide-format.ts`, `avm-theme.ts`
+- **Types e interfaces:** PascalCase — `CoverSlide`, `Carousel`, `SlideFormat`
 
 ---
 
@@ -114,12 +123,14 @@ Container que renderiza slides no tamanho exato.
 ```typescript
 interface SlideCanvasProps {
   children: React.ReactNode;
-  format?: 'square';  // v1 suporta apenas square
+  format?: SlideFormat  // "square" | "vertical" — default: "square"
+  className?: string;
+  id?: string;
 }
 
-// Dimensões
-const SLIDE_WIDTH = 1080;
-const SLIDE_HEIGHT = 1080;
+// Dimensões via SLIDE_DIMENSIONS[format]
+// Square:   1080 × 1080
+// Vertical: 1080 × 1350
 
 // No browser: renderiza em 50% scale para caber na tela
 // CSS: transform: scale(0.5);
@@ -276,19 +287,18 @@ Incluir em `index.css`:
 | Vite (não Next.js) | Next.js, CRA | Projeto local, sem SSR |
 | CSS Custom Properties | styled-components | Zero runtime, simples |
 | Tema Light Only | Light + Dark | MVP foca em light primeiro |
-| Apenas Square (v1) | Vertical + Square | Quadrado valida design |
+| Vertical + Square | Single format | Ambos os formatos suportados via `SlideFormat` enum |
 | Sem Exportação | html-to-image | Foco em design primeiro |
 | Dados em TS | JSON, CMS | Type-safe, autocomplete |
 
 ---
 
-## Limitações Conhecidas (v1)
+## Limitações Conhecidas
 
-1. **Formato único:** Apenas 1080×1080. Vertical vem em v1.1.
-2. **Um template:** Apenas Cover. Demais templates em v1.1+.
-3. **Sem persistência:** Dados vivem no código. Perder arquivo = perder conteúdo. Use git.
-4. **Sem exportação:** Visualização apenas. PNG export em v1.1.
-5. **Sem dark theme:** Light theme apenas. Dark theme em iteração futura.
+1. **Um template:** Apenas Cover implementado. Content, Code, Comparison, Closing em iterações futuras.
+2. **Sem persistência:** Dados vivem no código. Perder arquivo = perder conteúdo. Use git.
+3. **Sem exportação:** Visualização apenas. PNG export via `html-to-image` (pendente).
+4. **Sem dark theme:** Light theme apenas no canvas. Dark theme em iteração futura.
 
 ---
 

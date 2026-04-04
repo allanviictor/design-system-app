@@ -6,8 +6,8 @@ import { AccentBar } from "@/shared/components/AccentBar"
 import { Overline } from "@/shared/components/Overline"
 import { SlideFooter } from "@/shared/components/SlideFooter"
 import { Tag } from "@/shared/components/Tag"
-import { highlightWords } from "@/shared/lib/highlight"
-import { SlideCanvas } from "../canvas/SlideCanvas"
+import { highlightWords } from "@/shared/utils/highlight"
+import { SlideCanvas } from "../../canvas/SlideCanvas"
 
 interface CoverSlideProps extends CoverSlideData {
   format?: SlideFormat

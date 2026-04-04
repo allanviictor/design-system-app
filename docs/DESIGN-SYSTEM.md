@@ -166,27 +166,29 @@ Slide canvas renderiza em tamanho real (1080px) e é escalado via `transform: sc
 ```
 src/
 ├── features/
+│   ├── canvas/
+│   │   └── SlideCanvas.tsx
 │   └── slides/
-│       ├── components/
-│       │   ├── canvas/SlideCanvas.tsx
-│       │   └── templates/
-│       │       ├── CoverSlide.tsx
-│       │       ├── ContentSlide.tsx
-│       │       ├── CodeSlide.tsx
-│       │       ├── ComparisonSlide.tsx
-│       │       └── ClosingSlide.tsx
+│       ├── templates/
+│       │   ├── CoverSlide.tsx
+│       │   ├── ContentSlide.tsx
+│       │   ├── CodeSlide.tsx
+│       │   ├── ComparisonSlide.tsx
+│       │   └── ClosingSlide.tsx
 │       └── types/index.ts
 ├── shared/
 │   ├── components/
-│   │   ├── ui/                    (shadcn/ui)
-│   │   ├── theme-provider.tsx
-│   │   └── (AccentBar, BgShape, CodeBlock, etc.)
-│   └── lib/
-│       ├── avm-theme.ts           (Shiki syntax highlight)
-│       ├── shiki.ts               (highlighter singleton)
-│       └── highlight.tsx          (word highlight helper)
+│   │   ├── ui/                    (shadcn/ui — kebab-case filenames)
+│   │   └── (AccentBar, BgShape, CodeBlock, Overline, Pagination, SlideFooter, Tag)
+│   ├── enums/
+│   │   └── slide-format.ts
+│   └── utils/
+│       └── highlight.tsx          (pure function — not a component)
 └── lib/
-    └── utils.ts                   (cn() helper)
+    ├── utils.ts                   (cn() helper)
+    ├── ThemeProvider.tsx          (light/dark/system theme context)
+    ├── avm-theme.ts               (Shiki syntax highlight)
+    └── shiki.ts                   (highlighter singleton)
 ```
 
 ### Estilo de Inline Styles em Templates
@@ -225,9 +227,16 @@ Merge classes com: `cn()` de `@/lib/utils`
 
 ### Tipografia & Temas
 
-- **Slide canvas é sempre dark** — tokens de marca (`--bg-primary`, etc.) definidos em `:root`
+- **Slide canvas é sempre light** — tokens de marca (`--bg-primary`, etc.) definidos em `:root`
 - **App UI segue tema** — light/dark via `theme-provider.tsx`
 - Pressionar `d` para toggle tema
+
+### Nomeação de Arquivos e Tipos
+
+- **Componentes React (`.tsx`):** PascalCase — `SlideCanvas.tsx`, `ThemeProvider.tsx`, `AccentBar.tsx`
+- **shadcn/ui:** kebab-case como gerado pelo CLI — `badge.tsx`, `button.tsx`
+- **Módulos não-componentes (`.ts`):** kebab-case — `slide-format.ts`, `avm-theme.ts`, `utils.ts`
+- **Types e interfaces:** PascalCase — `CoverSlide`, `Carousel`, `SlideFormat`
 
 ### Formatação
 
@@ -242,7 +251,7 @@ Merge classes com: `cn()` de `@/lib/utils`
 | Arquivo | Responsabilidade |
 |---|---|
 | [src/index.css](../src/index.css) | Tokens de design, imports de fonte, reset Shiki |
-| [src/shared/components/theme-provider.tsx](../src/shared/components/theme-provider.tsx) | Context tema light/dark/system |
+| [src/lib/ThemeProvider.tsx](../src/lib/ThemeProvider.tsx) | Context tema light/dark/system |
 | [src/lib/utils.ts](../src/lib/utils.ts) | `cn()` helper (clsx + tailwind-merge) |
 | [src/shared/lib/avm-theme.ts](../src/shared/lib/avm-theme.ts) | Shiki theme customizado com cores marca |
 | [docs/SLIDE-TEMPLATES.md](./SLIDE-TEMPLATES.md) | Specs de layout para cada template |
