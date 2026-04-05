@@ -3,6 +3,7 @@ import { SlideFormat } from "@/shared/enums/slide-format"
 
 export const pilotoTestes: Carousel = {
   title: "Programação com Agentes de IA",
+  slug: "piloto-testes",
   format: SlideFormat.Square,
   slides: [
     {

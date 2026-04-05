@@ -21,6 +21,7 @@ export type Slide = CoverSlide
 
 export interface Carousel {
   title: string
+  slug: string
   format: SlideFormat
   slides: Slide[]
 }
