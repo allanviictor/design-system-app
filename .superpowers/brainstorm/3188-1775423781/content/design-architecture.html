@@ -1,0 +1,64 @@
+<h2>Design: Arquitetura do Export</h2>
+<p class="subtitle">Seção 1 de 3 — Estrutura de arquivos e responsabilidades</p>
+
+<div class="section">
+  <h3>Novos arquivos</h3>
+  <div class="mockup">
+    <div class="mockup-header">Estrutura de arquivos</div>
+    <div class="mockup-body" style="font-family: monospace; font-size: 13px; line-height: 1.8;">
+      <pre>src/
+├── features/
+│   └── export/
+│       ├── useExport.ts          ← hook: lógica de export (html-to-image + download)
+│       └── SlideExportControls.tsx  ← componente: botões "Este slide" e "Todos"
+└── App.tsx                       ← passa refs + filename para SlideExportControls</pre>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Responsabilidades</h3>
+  <table style="width:100%; border-collapse: collapse; font-size: 14px;">
+    <thead>
+      <tr style="background: rgba(255,107,0,0.1);">
+        <th style="padding: 8px 12px; text-align:left; border-bottom: 1px solid rgba(0,0,0,0.1);">Arquivo</th>
+        <th style="padding: 8px 12px; text-align:left; border-bottom: 1px solid rgba(0,0,0,0.1);">Faz</th>
+        <th style="padding: 8px 12px; text-align:left; border-bottom: 1px solid rgba(0,0,0,0.1);">Não faz</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06); font-weight: 600;">useExport.ts</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06);">Chama toPng(), dispara download, gerencia estado loading/error</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06);">Renderiza UI, conhece slides</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06); font-weight: 600;">SlideExportControls.tsx</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06);">Renderiza botões, mostra loading state, dispara toast</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06);">Lógica de export, conhece html-to-image</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; font-weight: 600;">App.tsx</td>
+        <td style="padding: 8px 12px;">Cria refs para cada slide, passa filename baseado em slug+tipo</td>
+        <td style="padding: 8px 12px;">Lógica de export, UI de botões</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h3>Fluxo de dados</h3>
+  <div class="mockup">
+    <div class="mockup-header">Data flow</div>
+    <div class="mockup-body" style="font-size: 13px; font-family: monospace; line-height: 2;">
+      <pre>App.tsx
+  └─ cria: refs[], filenames[] (ex: "piloto-testes-cover")
+  └─ renderiza: &lt;SlideExportControls ref={ref} filename={name} allRefs={refs} allFilenames={names} /&gt;
+        └─ usa: useExport(ref, filename)
+              └─ exportOne()  → toPng(ref) → triggerDownload(filename.png)
+              └─ exportAll()  → loop refs → toPng(ref) → triggerDownload em sequência</pre>
+    </div>
+  </div>
+</div>
+
+<p style="margin-top: 24px; font-size: 14px; color: var(--text-secondary)">Essa arquitetura te parece certa? Confirme no terminal para continuar com o design do hook e do componente.</p>

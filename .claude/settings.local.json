@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "Bash(git *)",
       "Bash(cd:*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
@@ -17,7 +18,11 @@
       "Bash(rm:*)",
       "Bash(curl -sI \"https://images.unsplash.com/photo-1506157786151-b8491531f063?w=600&h=800&fit=crop\")",
       "Bash(npx vite:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(bash \"C:/Users/allan victor/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh\" --project-dir \"c:/Users/allan victor/Desktop/projetos/design-system-app\")",
+      "Bash(npx shadcn@latest add sonner)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('prettier', {}\\), indent=2\\)\\)\")",
+      "Bash(npx prettier:*)"
     ]
   }
 }

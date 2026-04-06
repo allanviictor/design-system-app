@@ -1,0 +1,82 @@
+<h2>Design: Integração em App.tsx</h2>
+<p class="subtitle">Seção 3 de 3 — Como tudo se conecta</p>
+
+<div class="section">
+  <h3>Mudanças em App.tsx</h3>
+  <div class="mockup">
+    <div class="mockup-header">App.tsx — estrutura após integração</div>
+    <div class="mockup-body" style="font-family: monospace; font-size: 13px; line-height: 1.8;">
+<pre>// 1. Criar refs para cada slide
+const slideRefs = slides.map(() => useRef&lt;HTMLDivElement&gt;(null))
+
+// 2. Gerar filenames: "{slug}-{tipo}"
+//    ex: "piloto-testes-cover", "piloto-testes-content"
+const filenames = slides.map(s => `${carousel.slug}-${s.type}`)
+
+// 3. Cada slide wrapper recebe seu ref
+&lt;div ref={slideRefs[i]} style={{ width, height, ... }}&gt;
+  {renderSlide(slide, ...)}
+&lt;/div&gt;
+
+// 4. SlideExportControls renderizado abaixo de cada slide
+&lt;SlideExportControls
+  ref={slideRefs[i]}
+  filename={filenames[i]}
+  allRefs={slideRefs}
+  allFilenames={filenames}
+/&gt;</pre>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Mudança no tipo Carousel</h3>
+  <div class="mockup">
+    <div class="mockup-header">src/features/slides/types/index.ts</div>
+    <div class="mockup-body" style="font-family: monospace; font-size: 13px; line-height: 1.8;">
+<pre>interface Carousel {
+  title: string
+  slug: string      // ← NOVO: usado para nomear os PNGs exportados
+  slides: Slide[]
+  format: SlideFormat
+}</pre>
+    </div>
+  </div>
+  <p style="font-size:13px; color: var(--text-secondary); margin-top: 8px;">
+    O campo <code>slug</code> já existe implicitamente como nome da pasta em <code>src/posts/piloto-testes/</code>. Só precisa ser adicionado ao tipo e ao dado.
+  </p>
+</div>
+
+<div class="section">
+  <h3>Dependência nova</h3>
+  <table style="width:100%; border-collapse: collapse; font-size: 14px;">
+    <thead>
+      <tr style="background: rgba(255,107,0,0.1);">
+        <th style="padding: 8px 12px; text-align:left; border-bottom: 1px solid rgba(0,0,0,0.1);">Pacote</th>
+        <th style="padding: 8px 12px; text-align:left; border-bottom: 1px solid rgba(0,0,0,0.1);">Uso</th>
+        <th style="padding: 8px 12px; text-align:left; border-bottom: 1px solid rgba(0,0,0,0.1);">Instalação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06); font-weight: 600;">html-to-image</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06);">Renderiza DOM → PNG com pixelRatio: 2</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid rgba(0,0,0,0.06); font-family: monospace;">npm install html-to-image</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; font-weight: 600;">sonner</td>
+        <td style="padding: 8px 12px;">Toast de confirmação</td>
+        <td style="padding: 8px 12px; font-family: monospace;">npx shadcn@latest add sonner</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h3>Limitação conhecida do html-to-image</h3>
+  <div style="background: rgba(255,107,0,0.08); border-left: 3px solid #FF6B00; padding: 12px 16px; border-radius: 4px; font-size: 13px; line-height: 1.6;">
+    <strong>Google Fonts no export:</strong> html-to-image não consegue embedar fontes carregadas via @import de CDN externo. Para garantir as fontes no PNG, o hook vai usar a opção <code>fontEmbedCSS</code> ou um <code>preferredFontFormat</code>. Alternativa: usar <code>toBlob</code> com espera de fontes via <code>document.fonts.ready</code> antes de capturar.
+  </div>
+</div>
+
+<p style="margin-top: 24px; font-size: 14px; color: var(--text-secondary)">Design completo. Confirme no terminal se está tudo ok para escrever o spec.</p>

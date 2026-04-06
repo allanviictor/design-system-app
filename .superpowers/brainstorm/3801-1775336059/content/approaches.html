@@ -1,0 +1,43 @@
+<h2>Abordagens para o Export Pipeline</h2>
+<p class="subtitle">Escolha a arquitetura que melhor se encaixa no projeto</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>html-to-image direto no componente</h3>
+      <p>Cada slide wrapper em <code>App.tsx</code> recebe um <code>ref</code>. A função de export chama <code>toPng(ref.current)</code> diretamente, sem abstração. Simples e direto.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Prós</h4><ul><li>Mínimo de código novo</li><li>Sem camadas extras</li><li>Fácil de entender</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Lógica de export espalhada em App.tsx</li><li>Difícil de reusar em outros contextos</li></ul></div>
+      </div>
+      <p class="label">Recomendado para: MVP rápido</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>useExport hook + SlideExportControls</h3>
+      <p>Hook <code>useExport(ref, { filename })</code> encapsula toda lógica: estado de loading, chamada ao html-to-image, download, toast. Componente <code>SlideExportControls</code> consome o hook e renderiza os botões.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Prós</h4><ul><li>Separação clara de responsabilidades</li><li>Hook testável isoladamente</li><li>App.tsx fica limpo</li><li>Reutilizável se o projeto crescer</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Mais arquivos para criar</li></ul></div>
+      </div>
+      <p class="label">⭐ Recomendado — melhor trade-off</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Feature dedicada: features/export/</h3>
+      <p>Feature completa com <code>ExportProvider</code> (contexto global), fila de jobs, progress bar por slide, e orquestração centralizada de todos os exports.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Prós</h4><ul><li>Escalável para batch de muitos slides</li><li>Estado global compartilhado</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Over-engineering para o uso atual</li><li>Muito mais código que o necessário</li><li>Contexto global desnecessário agora</li></ul></div>
+      </div>
+      <p class="label">Recomendado para: app com muitos carrosséis simultâneos</p>
+    </div>
+  </div>
+</div>
