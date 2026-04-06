@@ -1,5 +1,5 @@
 import { useExport } from "./useExport"
-import { RefObject } from "react"
+import type { RefObject } from "react"
 import { toast } from "sonner"
 
 interface SlideExportControlsProps {

@@ -3,6 +3,7 @@ import type { ThemeRegistrationRaw } from "shiki"
 export const avmDarkTheme: ThemeRegistrationRaw = {
   name: "avm-dark",
   type: "dark",
+  settings: [],
   colors: {
     "editor.background": "#111111",
     "editor.foreground": "#F0EDE8",

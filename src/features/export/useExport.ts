@@ -1,5 +1,6 @@
 import { toPng } from "html-to-image"
-import { RefObject, useCallback, useRef, useState } from "react"
+import type { RefObject } from "react"
+import { useCallback, useRef, useState } from "react"
 
 interface UseExportOptions {
   filename: string

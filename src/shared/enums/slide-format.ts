@@ -1,7 +1,9 @@
-export enum SlideFormat {
-  Vertical = "vertical",
-  Square = "square",
-}
+export const SlideFormat = {
+  Vertical: "vertical",
+  Square: "square",
+} as const
+
+export type SlideFormat = (typeof SlideFormat)[keyof typeof SlideFormat]
 
 export const SLIDE_DIMENSIONS: Record<
   SlideFormat,
