@@ -19,7 +19,7 @@ export function SlideExportControls({
     slideRef,
     allRefs,
     allFilenames,
-    { filename },
+    { filename }
   )
 
   async function handleExportOne() {
