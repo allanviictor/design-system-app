@@ -27,7 +27,7 @@ export function useExport(
   ref: RefObject<HTMLDivElement | null>,
   allRefs: RefObject<HTMLDivElement | null>[],
   allFilenames: string[],
-  options: UseExportOptions,
+  options: UseExportOptions
 ): UseExportReturn {
   const [isExporting, setIsExporting] = useState(false)
   const exportingRef = useRef(false)
