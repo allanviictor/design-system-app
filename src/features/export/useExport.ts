@@ -21,7 +21,16 @@ function triggerDownload(dataUrl: string, filename: string) {
 
 async function captureElement(el: HTMLElement): Promise<string> {
   await document.fonts.ready
-  return toPng(el, { pixelRatio: 2 })
+  const prevTransform = el.style.transform
+  const prevTransformOrigin = el.style.transformOrigin
+  el.style.transform = "none"
+  el.style.transformOrigin = "top left"
+  try {
+    return await toPng(el, { pixelRatio: 2 })
+  } finally {
+    el.style.transform = prevTransform
+    el.style.transformOrigin = prevTransformOrigin
+  }
 }
 
 export function useExport(
