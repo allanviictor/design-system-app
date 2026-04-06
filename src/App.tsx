@@ -1,4 +1,4 @@
-import { createRef, useRef } from "react"
+import { createRef, useMemo, useRef } from "react"
 import { SlideExportControls } from "@/features/export/SlideExportControls"
 import { CoverSlide } from "@/features/slides/templates/CoverSlide"
 import type { Slide } from "@/features/slides/types"
@@ -11,7 +11,7 @@ function renderSlide(
   slide: Slide,
   format: SlideFormat,
   currentSlide: number,
-  totalSlides: number,
+  totalSlides: number
 ) {
   const base = { format, currentSlide, totalSlides }
   switch (slide.type) {
@@ -26,7 +26,10 @@ export default function App() {
   const total = slides.length
 
   const slideRefs = useRef(slides.map(() => createRef<HTMLDivElement>()))
-  const filenames = slides.map((s) => `${slug}-${s.type}`)
+  const filenames = useMemo(
+    () => slides.map((s) => `${slug}-${s.type}`),
+    [slides, slug]
+  )
 
   return (
     <div className="flex min-h-svh flex-col items-center gap-8 bg-background py-16">
