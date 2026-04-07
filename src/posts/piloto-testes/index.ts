@@ -1,5 +1,5 @@
-import type { Carousel } from "@/features/slides/types"
 import { SlideFormat } from "@/shared/enums/slide-format"
+import type { Carousel } from "@/shared/types"
 
 export const pilotoTestes: Carousel = {
   title: "Programação com Agentes de IA",

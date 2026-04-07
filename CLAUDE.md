@@ -24,17 +24,22 @@ Feature-based. Each feature is self-contained; `shared/` holds what's reused acr
 ```
 src/
 ├── features/
-│   ├── canvas/
-│   │   └── SlideCanvas.tsx            # slide canvas container
+│   ├── export/
+│   │   └── SlideExportControls.tsx    # botão "Todos os slides" (exportação global)
 │   └── slides/                        # slide rendering feature
-│       ├── templates/                 # CoverSlide, ContentSlide, CodeSlide, ComparisonSlide, ClosingSlide
-│       └── types/index.ts             # Slide, Carousel, SlideFormat, ComparisonCard…
+│       └── templates/                 # CoverSlide, ContentSlide, CodeSlide, ComparisonSlide, ClosingSlide
 ├── shared/
 │   ├── components/
-│   │   ├── ui/                        # shadcn/ui components (CLI-generated, kebab-case filenames)
-│   │   └── (AccentBar, BgShape, CodeBlock, Overline, Pagination, SlideFooter, Tag)
+│   │   ├── canvas/
+│   │   │   └── SlideCanvas.tsx        # slide canvas container
+│   │   ├── template-components/       # AccentBar, BgShape, CodeBlock, Overline, Pagination, SlideFooter, Tag
+│   │   └── ui/                        # shadcn/ui components (CLI-generated, kebab-case filenames)
 │   ├── enums/
 │   │   └── slide-format.ts            # SlideFormat enum + SLIDE_DIMENSIONS
+│   ├── hooks/
+│   │   └── useExport.ts               # exportOne, exportAll, isExporting — wrapper html-to-image
+│   ├── types/
+│   │   └── index.ts                   # Slide, Carousel, SlideFormat, ComparisonCard…
 │   └── utils/
 │       └── highlight.tsx              # word-highlight helper (pure function)
 ├── lib/
@@ -48,7 +53,7 @@ src/
 └── index.css                          # all design tokens + Shiki CSS reset
 ```
 
-**Data model:** Each post is a `Carousel` — a typed array of slides, each with a `type` discriminant that selects which template to render. Slide index and navigation live in `App.tsx` state.
+**Data model:** Each post is a `Carousel` — a typed array of slides, each with a `type` discriminant that selects which template to render. Types live in `shared/types/index.ts`. Slide index and navigation live in `App.tsx` state.
 
 **Export pipeline:** `html-to-image` will render `SlideCanvas` to PNG at `pixelRatio: 2`. The canvas renders at real size (1080px) and is scaled via `transform: scale()` for preview only.
 
@@ -75,7 +80,9 @@ All defined as CSS custom properties in `index.css`. The slide canvas always use
 ## Conventions
 
 - Path alias `@/` maps to `src/` — use it for all cross-feature and cross-layer imports.
-- Within `features/slides`: use relative imports.
+- Within a feature directory: use relative imports.
+- Types shared across features go in `@/shared/types/index.ts`. Feature-specific types stay local.
+- Hooks shared across features go in `@/shared/hooks/`. Feature-specific hooks stay inside the feature.
 - No barrel files (`index.ts` re-exports) — import directly from the source file.
 - New shadcn/ui components: `npx shadcn@latest add <component>` — they generate into `@/shared/components/ui/` (configured in `components.json`).
 - Tailwind classes: merge with `cn()` from `@/lib/utils`.

@@ -1,13 +1,10 @@
-import {
-  SlideFormat,
-  type CoverSlide as CoverSlideData,
-} from "@/features/slides/types"
-import { AccentBar } from "@/shared/components/AccentBar"
-import { Overline } from "@/shared/components/Overline"
-import { SlideFooter } from "@/shared/components/SlideFooter"
-import { Tag } from "@/shared/components/Tag"
+import { AccentBar } from "@/shared/components/template-components/AccentBar"
+import { Overline } from "@/shared/components/template-components/Overline"
+import { SlideFooter } from "@/shared/components/template-components/SlideFooter"
+import { Tag } from "@/shared/components/template-components/Tag"
+import { SlideFormat, type CoverSlide as CoverSlideData } from "@/shared/types"
 import { highlightWords } from "@/shared/utils/highlight"
-import { SlideCanvas } from "../../canvas/SlideCanvas"
+import { SlideCanvas } from "../../../shared/components/canvas/SlideCanvas"
 
 interface CoverSlideProps extends CoverSlideData {
   format?: SlideFormat

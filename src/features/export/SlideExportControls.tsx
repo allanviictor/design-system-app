@@ -1,7 +1,7 @@
 import { Button } from "@/shared/components/ui/button"
 import type { RefObject } from "react"
 import { toast } from "sonner"
-import { useExport } from "./useExport"
+import { useExport } from "../../shared/hooks/useExport"
 
 interface SlideExportControlsProps {
   allRefs: RefObject<HTMLDivElement | null>[]

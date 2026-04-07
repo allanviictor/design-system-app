@@ -26,7 +26,10 @@
       "Bash(C:/Users/\"allan victor\"/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/scripts/start-server.sh --project-dir \"c:/Users/allan victor/Desktop/projetos/design-system-app\")",
       "Bash(bash \"/c/Users/allan victor/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh\" --project-dir \"/c/Users/allan victor/Desktop/projetos/design-system-app\")",
       "mcp__context7__resolve-library-id",
-      "mcp__context7__query-docs"
+      "mcp__context7__query-docs",
+      "Read(//c/Users/allan victor/.claude/**)",
+      "Read(//c/Users/allan victor/.claude/skills/**)",
+      "Read(//c/Users/allan victor/.claude/plugins/**)"
     ]
   }
 }
