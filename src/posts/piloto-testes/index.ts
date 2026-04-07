@@ -16,15 +16,5 @@ export const pilotoTestes: Carousel = {
       tags: ["IA", "Agentes", "LLM", "TypeScript"],
       authorPhoto: "/src/assets/img-cover.png",
     },
-    {
-      type: "cover",
-      overline: "IA · AGENTES · SDK",
-      headline: "Testando exportação",
-      highlightWords: ["Testando"],
-      subtitle:
-        "Como LLMs com ferramentas estão mudando a forma de construir software",
-      tags: ["IA", "Agentes", "LLM", "TypeScript"],
-      authorPhoto: "/src/assets/img-cover.png",
-    },
   ],
 }
