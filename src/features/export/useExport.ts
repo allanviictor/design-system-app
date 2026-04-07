@@ -3,7 +3,7 @@ import type { RefObject } from "react"
 import { useCallback, useRef, useState } from "react"
 
 interface UseExportOptions {
-  filename: string
+  filename?: string
 }
 
 interface UseExportReturn {
@@ -34,21 +34,21 @@ async function captureElement(el: HTMLElement): Promise<string> {
 }
 
 export function useExport(
-  ref: RefObject<HTMLDivElement | null>,
+  ref: RefObject<HTMLDivElement | null> | null,
   allRefs: RefObject<HTMLDivElement | null>[],
   allFilenames: string[],
-  options: UseExportOptions
+  options: UseExportOptions = {}
 ): UseExportReturn {
   const [isExporting, setIsExporting] = useState(false)
   const exportingRef = useRef(false)
 
   const exportOne = useCallback(async () => {
-    if (exportingRef.current || !ref.current) return
+    if (exportingRef.current || !ref?.current) return
     exportingRef.current = true
     setIsExporting(true)
     try {
       const dataUrl = await captureElement(ref.current)
-      triggerDownload(dataUrl, options.filename)
+      triggerDownload(dataUrl, options.filename ?? "slide")
     } finally {
       exportingRef.current = false
       setIsExporting(false)
