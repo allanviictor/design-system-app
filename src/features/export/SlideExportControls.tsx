@@ -4,29 +4,15 @@ import { toast } from "sonner"
 import { useExport } from "./useExport"
 
 interface SlideExportControlsProps {
-  slideRef: RefObject<HTMLDivElement | null>
-  filename: string
   allRefs: RefObject<HTMLDivElement | null>[]
   allFilenames: string[]
 }
 
 export function SlideExportControls({
-  slideRef,
-  filename,
   allRefs,
   allFilenames,
 }: SlideExportControlsProps) {
-  const { exportOne, exportAll, isExporting } = useExport(
-    slideRef,
-    allRefs,
-    allFilenames,
-    { filename }
-  )
-
-  async function handleExportOne() {
-    await exportOne()
-    toast.success(`${filename}.png exportado`)
-  }
+  const { exportAll, isExporting } = useExport(null, allRefs, allFilenames)
 
   async function handleExportAll() {
     await exportAll()
@@ -34,23 +20,15 @@ export function SlideExportControls({
   }
 
   return (
-    <div className="mt-3 flex justify-center gap-2">
-      <Button
-        onClick={handleExportOne}
-        disabled={isExporting}
-        size="sm"
-        className="cursor-pointer"
-      >
-        {isExporting ? "Exportando..." : "↓ Este slide"}
-      </Button>
+    <div className="mt-4 flex justify-center">
       <Button
         onClick={handleExportAll}
         disabled={isExporting}
-        variant="outline"
-        size="sm"
+        variant="default"
+        size="lg"
         className="cursor-pointer"
       >
-        ↓ Todos os slides
+        {isExporting ? "Exportando..." : "↓ Todos os slides"}
       </Button>
     </div>
   )
