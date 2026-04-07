@@ -46,14 +46,10 @@ export default function App() {
         {slides.map((slide, i) => (
           <div key={i}>
             <div
+              className="relative overflow-hidden rounded-lg shadow-2xl"
               style={{
                 width: width * SCALE,
                 height: height * SCALE,
-                position: "relative",
-                overflow: "hidden",
-                borderRadius: 8,
-                boxShadow:
-                  "0 0 0 1px rgba(255,255,255,0.06), 0 24px 48px rgba(0,0,0,0.5)",
               }}
             >
               <div

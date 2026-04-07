@@ -1,6 +1,7 @@
-import { useExport } from "./useExport"
+import { Button } from "@/shared/components/ui/button"
 import type { RefObject } from "react"
 import { toast } from "sonner"
+import { useExport } from "./useExport"
 
 interface SlideExportControlsProps {
   slideRef: RefObject<HTMLDivElement | null>
@@ -33,51 +34,24 @@ export function SlideExportControls({
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: 8,
-        justifyContent: "center",
-        marginTop: 12,
-      }}
-    >
-      <button
+    <div className="mt-3 flex justify-center gap-2">
+      <Button
         onClick={handleExportOne}
         disabled={isExporting}
-        style={{
-          padding: "6px 14px",
-          background: isExporting ? "rgba(255,107,0,0.6)" : "#FF6B00",
-          color: "white",
-          border: "none",
-          borderRadius: 6,
-          fontSize: 12,
-          fontFamily: "Inter, sans-serif",
-          fontWeight: 500,
-          cursor: isExporting ? "not-allowed" : "pointer",
-          transition: "background 0.15s",
-        }}
+        size="sm"
+        className="cursor-pointer"
       >
         {isExporting ? "Exportando..." : "↓ Este slide"}
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={handleExportAll}
         disabled={isExporting}
-        style={{
-          padding: "6px 14px",
-          background: "transparent",
-          color: isExporting ? "#9A9790" : "#5C5A56",
-          border: "1px solid rgba(0,0,0,0.15)",
-          borderRadius: 6,
-          fontSize: 12,
-          fontFamily: "Inter, sans-serif",
-          fontWeight: 500,
-          cursor: isExporting ? "not-allowed" : "pointer",
-          opacity: isExporting ? 0.5 : 1,
-          transition: "opacity 0.15s",
-        }}
+        variant="outline"
+        size="sm"
+        className="cursor-pointer"
       >
         ↓ Todos os slides
-      </button>
+      </Button>
     </div>
   )
 }
