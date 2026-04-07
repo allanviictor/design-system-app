@@ -19,8 +19,8 @@ export const pilotoTestes: Carousel = {
     {
       type: "cover",
       overline: "IA · AGENTES · SDK",
-      headline: "Programação com Agentes de IA",
-      highlightWords: ["Agentes"],
+      headline: "Testando exportação",
+      highlightWords: ["Testando"],
       subtitle:
         "Como LLMs com ferramentas estão mudando a forma de construir software",
       tags: ["IA", "Agentes", "LLM", "TypeScript"],

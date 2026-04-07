@@ -22,7 +22,11 @@
       "Bash(bash \"C:/Users/allan victor/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh\" --project-dir \"c:/Users/allan victor/Desktop/projetos/design-system-app\")",
       "Bash(npx shadcn@latest add sonner)",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('prettier', {}\\), indent=2\\)\\)\")",
-      "Bash(npx prettier:*)"
+      "Bash(npx prettier:*)",
+      "Bash(C:/Users/\"allan victor\"/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/scripts/start-server.sh --project-dir \"c:/Users/allan victor/Desktop/projetos/design-system-app\")",
+      "Bash(bash \"/c/Users/allan victor/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh\" --project-dir \"/c/Users/allan victor/Desktop/projetos/design-system-app\")",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs"
     ]
   }
 }

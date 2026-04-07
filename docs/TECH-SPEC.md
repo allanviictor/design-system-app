@@ -111,6 +111,8 @@ src/
 - **Componentes React (`.tsx`):** PascalCase — `ThemeProvider.tsx`, `SlideCanvas.tsx`
 - **Módulos não-componentes (`.ts`):** kebab-case — `slide-format.ts`, `avm-theme.ts`
 - **Types e interfaces:** PascalCase — `CoverSlide`, `Carousel`, `SlideFormat`
+- **Styling:** Tailwind classes por padrão em todo código de UI fora dos slide templates. `style` prop reservado exclusivamente para componentes em `features/slides/templates/` (limitação do `html-to-image`).
+- **Componentes UI:** Sempre usar componentes shadcn/ui quando disponíveis. Nunca estilizar elementos HTML nativos manualmente (ex: `<Button>` em vez de `<button style={...}>`).
 
 ---
 

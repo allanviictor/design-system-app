@@ -79,6 +79,8 @@ All defined as CSS custom properties in `index.css`. The slide canvas always use
 - No barrel files (`index.ts` re-exports) — import directly from the source file.
 - New shadcn/ui components: `npx shadcn@latest add <component>` — they generate into `@/shared/components/ui/` (configured in `components.json`).
 - Tailwind classes: merge with `cn()` from `@/lib/utils`.
+- **Styling:** Use Tailwind classes by default for all UI outside slide templates. Inline styles (`style` prop) are reserved exclusively for slide template components (`features/slides/templates/`) — required for `html-to-image` export compatibility.
+- **UI components:** Always use shadcn/ui components (`@/shared/components/ui/`) when available. Never style native HTML elements by hand (e.g., use `<Button>` not `<button style={...}>`).
 - Slide templates use **inline styles** (not Tailwind classes) — required for `html-to-image` export compatibility.
 - Prettier: no semicolons, double quotes, 2-space indent, trailing commas (ES5).
 - TypeScript strict mode — no unused locals/params.
